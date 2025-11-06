@@ -2,6 +2,7 @@ import { Header } from './_components/Header'
 import { Footer } from './_components/Footer'
 import { CustomCursor } from './_components/CustomCursor'
 import { SmoothScroll } from './_components/SmoothScroll'
+import { PerformanceOptimizer } from './_components/PerformanceOptimizer'
 import { Hero } from './_sections/Hero'
 import { Problem } from './_sections/Problem'
 import { HowItWorks } from './_sections/HowItWorks'
@@ -13,9 +14,10 @@ export default function HomePage() {
   return (
     <>
       <SmoothScroll />
+      <PerformanceOptimizer />
       <CustomCursor />
       <Header />
-      <main className="snap-y snap-mandatory">
+      <main>
         <Hero />
         <Problem />
         <HowItWorks />

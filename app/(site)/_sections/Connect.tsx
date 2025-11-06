@@ -2,6 +2,7 @@
 
 import { Section } from '../_components/Section'
 import { DigitalTwinVisualization } from '../_components/DigitalTwinVisualization'
+import { TwinInteractionDemo } from '../_components/TwinInteractionDemo'
 import { motion } from 'framer-motion'
 
 export function Connect() {
@@ -38,6 +39,17 @@ export function Connect() {
             Connect with others and watch your twins merge preference graphs. The AI finds shared
             interests and suggests plans both would enjoy.
           </p>
+        </motion.div>
+
+        {/* Interactive Demo */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="mb-12"
+        >
+          <TwinInteractionDemo />
         </motion.div>
 
         {/* Visualization */}
@@ -85,18 +97,42 @@ export function Connect() {
           ))}
         </div>
 
-        {/* Example */}
+        {/* How It Works */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 rounded-xl border border-cy/30 bg-gradient-to-r from-cy/10 to-vi/10 p-8 text-center"
+          className="mt-12 rounded-xl border border-cy/30 bg-gradient-to-r from-cy/10 to-vi/10 p-6"
         >
-          <p className="text-lg text-fg/80">
-            <span className="font-semibold text-cy">Example:</span> &quot;You both love seaside cafés
-            and live music. Try these 3 new spots near La Jolla.&quot;
-          </p>
+          <h3 className="mb-4 text-center text-xl font-bold text-fg">How the AI Works</h3>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                step: '1',
+                title: 'Analyze Profiles',
+                description: 'Extract preference vectors from both users\' experience histories',
+              },
+              {
+                step: '2',
+                title: 'Find Overlap',
+                description: 'Calculate compatibility scores and identify shared interests',
+              },
+              {
+                step: '3',
+                title: 'Smart Suggestions',
+                description: 'Recommend venues that maximize satisfaction for both users',
+              },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-cy/20 text-sm font-bold text-cy">
+                  {item.step}
+                </div>
+                <h4 className="mb-1 font-semibold text-fg">{item.title}</h4>
+                <p className="text-sm text-fg/60">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </Section>

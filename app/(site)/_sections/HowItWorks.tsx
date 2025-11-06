@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Section } from '../_components/Section'
 import { MobileAppPreview, CheckInScreen, ChatScreen } from '../_components/MobileAppPreview'
 import { DigitalTwinVisualization } from '../_components/DigitalTwinVisualization'
+import { TwinInteractionDemo } from '../_components/TwinInteractionDemo'
 import { FloatingParticles } from '../_components/FloatingParticles'
 import { MorphingBlob } from '../_components/MorphingBlob'
 import { motion } from 'framer-motion'
@@ -156,12 +157,16 @@ export function HowItWorks() {
                   },
                 ]}
               />
+            ) : steps[activeStep].showConnection ? (
+              <div className="w-full">
+                <TwinInteractionDemo />
+              </div>
             ) : (
               <div className="relative h-[500px] w-full max-w-2xl rounded-2xl bg-gradient-to-br from-vi/10 to-am/10 p-8 glass">
                 <DigitalTwinVisualization
                   showLearning={steps[activeStep].showLearning}
-                  showConnection={steps[activeStep].showConnection}
-                  twinCount={steps[activeStep].showConnection ? 2 : undefined}
+                  showConnection={false}
+                  twinCount={1}
                 />
               </div>
             )}

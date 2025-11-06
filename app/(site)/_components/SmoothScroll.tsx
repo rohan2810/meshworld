@@ -4,23 +4,7 @@ import { useEffect } from 'react'
 
 export function SmoothScroll() {
   useEffect(() => {
-    // Enhanced smooth scrolling with momentum
-    let isScrolling = false
-    let scrollTimeout: NodeJS.Timeout
-
-    const handleScroll = () => {
-      if (!isScrolling) {
-        isScrolling = true
-        document.documentElement.style.scrollBehavior = 'smooth'
-      }
-
-      clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false
-      }, 150)
-    }
-
-    // Smooth scroll for anchor links
+    // Smooth scroll for anchor links with easing
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const anchor = target.closest('a[href^="#"]')
@@ -34,23 +18,40 @@ export function SmoothScroll() {
             const headerOffset = 80
             const elementPosition = targetElement.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+            const startPosition = window.pageYOffset
+            const distance = offsetPosition - startPosition
+            const duration = 800
+            let start: number | null = null
 
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth',
-            })
+            const easeInOutCubic = (t: number) => {
+              return t < 0.5
+                ? 4 * t * t * t
+                : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+            }
+
+            const animation = (currentTime: number) => {
+              if (start === null) start = currentTime
+              const timeElapsed = currentTime - start
+              const progress = Math.min(timeElapsed / duration, 1)
+              const ease = easeInOutCubic(progress)
+              
+              window.scrollTo(0, startPosition + distance * ease)
+              
+              if (timeElapsed < duration) {
+                requestAnimationFrame(animation)
+              }
+            }
+
+            requestAnimationFrame(animation)
           }
         }
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
     document.addEventListener('click', handleAnchorClick)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('click', handleAnchorClick)
-      clearTimeout(scrollTimeout)
     }
   }, [])
 

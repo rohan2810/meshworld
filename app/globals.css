@@ -167,45 +167,39 @@
 
   .snap-section {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
+    contain: layout style paint;
   }
 }
 
 /* Smooth scrolling with offset for fixed header */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 80px;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Scroll snap for slide-based sections */
+/* Gentle scroll snap for slide-based sections */
 main {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
 }
 
-/* Enhanced smooth scrolling */
-* {
-  scroll-behavior: smooth;
+/* Better scroll performance */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 /* Smooth scroll with momentum */
 @media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   
   main {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-  }
-  
-  /* Better scroll performance */
-  .snap-section {
-    will-change: scroll-position;
-    transform: translateZ(0);
+    scroll-snap-type: y proximity;
   }
 }
 
@@ -262,9 +256,13 @@ main {
   transition: transform 0.1s ease-out;
 }
 
-/* Smooth transitions for all interactive elements */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+/* Smooth transitions for interactive elements only */
+button,
+a,
+input,
+textarea,
+select {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
@@ -280,6 +278,45 @@ button:hover, a:hover {
 
 button:active, a:active {
   transform: translateY(0);
+}
+
+/* Performance optimizations */
+/* Pause expensive animations when scrolling */
+.is-scrolling .particles,
+.is-scrolling .morphing-blob,
+.is-scrolling .floating-particles {
+  animation-play-state: paused !important;
+}
+
+/* Reduce animation complexity when not in view */
+.particles:not(.in-view),
+.morphing-blob:not(.in-view) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hardware acceleration for smooth transforms */
+.snap-section,
+section {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize repaints */
+img,
+video {
+  transform: translateZ(0);
+}
+
+/* Reduce motion for better performance */
+@media (prefers-reduced-motion: reduce) {
+  .particles,
+  .morphing-blob,
+  .floating-particles {
+    animation: none !important;
+    opacity: 0.5;
+  }
 }
 
 /* Custom cursor styles */
