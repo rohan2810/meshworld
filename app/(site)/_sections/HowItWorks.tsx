@@ -88,20 +88,20 @@ export function HowItWorks() {
         </motion.div>
 
         {/* Step Tabs */}
-        <div className="mb-12 flex flex-wrap justify-center gap-4">
+        <div className="mb-8 sm:mb-12 flex flex-wrap justify-center gap-2 sm:gap-4 px-4 sm:px-0">
           {steps.map((step, index) => (
             <button
               key={step.id}
               onClick={() => setActiveStep(index)}
               className={cn(
-                'group relative rounded-full px-6 py-3 text-sm font-medium transition-all duration-300',
+                'group relative rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 min-h-[44px] touch-manipulation',
                 activeStep === index
                   ? 'bg-gradient-luminous text-bg shadow-lg shadow-cy/30'
                   : 'glass-cy text-fg/70 hover:text-fg hover:bg-cy/10'
               )}
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <span className="text-xs opacity-70">Step {step.step}</span>
+              <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
+                <span className="text-[10px] sm:text-xs opacity-70">Step {step.step}</span>
                 <span>{step.title}</span>
               </span>
             </button>
@@ -109,7 +109,7 @@ export function HowItWorks() {
         </div>
 
         {/* Active Step Content */}
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 items-center">
           {/* Text Content */}
           <motion.div
             key={activeStep}

@@ -13,10 +13,10 @@ const buttonVariants = cva(
         ghost: 'text-fg hover:bg-fg/10 hover:text-cy transition-all duration-300',
       },
       size: {
-        default: 'h-12 px-6 py-2 text-base',
-        sm: 'h-9 px-4 text-sm',
-        lg: 'h-14 px-8 text-lg',
-        icon: 'h-10 w-10',
+        default: 'h-12 min-h-[44px] px-6 py-2 text-base',
+        sm: 'h-9 min-h-[44px] px-4 text-sm',
+        lg: 'h-14 min-h-[44px] px-8 text-lg',
+        icon: 'h-10 w-10 min-h-[44px] min-w-[44px]',
       },
     },
     defaultVariants: {

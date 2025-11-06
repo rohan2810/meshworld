@@ -56,7 +56,7 @@ export function Hero() {
       <div className="grid-background" />
 
       {/* Content */}
-      <Container className="relative z-10 py-32">
+      <Container className="relative z-10 py-20 sm:py-24 md:py-32">
         <motion.div
           variants={staggerChildren}
           initial="initial"
@@ -67,7 +67,7 @@ export function Hero() {
           <motion.h1
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="mb-6 text-5xl font-bold leading-tight tracking-tight text-fg md:text-7xl"
+            className="mb-6 text-3xl font-bold leading-tight tracking-tight text-fg sm:text-4xl md:text-5xl lg:text-7xl px-4 sm:px-0"
           >
             Transform your real-world experiences into a{' '}
             <span className="text-gradient glow-cy">
@@ -79,7 +79,7 @@ export function Hero() {
           <motion.p
             variants={fadeInUp}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12 text-xl text-fg/80 md:text-2xl"
+            className="mb-12 text-lg text-fg/80 sm:text-xl md:text-2xl px-4 sm:px-0"
           >
             Powered by an AI agent that helps you reflect, plan, and connect.
           </motion.p>
@@ -94,12 +94,13 @@ export function Hero() {
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className="w-full sm:w-auto"
             >
               <Button
                 variant="primary"
                 size="lg"
                 onClick={() => scrollToSection('cta')}
-                className="min-w-[200px] shadow-2xl shadow-cy/50"
+                className="w-full sm:min-w-[200px] shadow-2xl shadow-cy/50"
               >
                 Join Waitlist
               </Button>
@@ -108,12 +109,13 @@ export function Hero() {
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className="w-full sm:w-auto"
             >
               <Button
                 variant="secondary"
                 size="lg"
                 onClick={() => scrollToSection('how-it-works')}
-                className="min-w-[200px]"
+                className="w-full sm:min-w-[200px]"
               >
                 See How It Works
               </Button>

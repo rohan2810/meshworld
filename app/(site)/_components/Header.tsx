@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +18,18 @@ export function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    // Close mobile menu when clicking outside or on a link
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -46,15 +59,16 @@ export function Header() {
         />
       )}
       <Container>
-        <nav className="relative flex h-20 items-center justify-between" aria-label="Main navigation">
+        <nav className="relative flex h-16 md:h-20 items-center justify-between" aria-label="Main navigation">
           {/* Logo */}
           <motion.a
             href="#hero"
             onClick={(e) => {
               e.preventDefault()
+              setIsMobileMenuOpen(false)
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="text-2xl font-bold tracking-tight text-fg transition-colors hover:text-cy focus-visible:text-cy"
+            className="text-xl md:text-2xl font-bold tracking-tight text-fg transition-colors hover:text-cy focus-visible:text-cy"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -63,8 +77,8 @@ export function Header() {
             </span>
           </motion.a>
 
-          {/* Navigation Links */}
-          <div className="hidden items-center gap-8 md:flex">
+          {/* Desktop Navigation Links */}
+          <div className="hidden items-center gap-6 lg:gap-8 md:flex">
             {[
               { href: 'how-it-works', label: 'How It Works' },
               { href: 'features', label: 'Features' },
@@ -78,7 +92,7 @@ export function Header() {
                   e.preventDefault()
                   scrollToSection(link.href)
                 }}
-                className="relative text-sm font-medium text-fg/70 transition-colors hover:text-cy focus-visible:text-cy"
+                className="relative text-sm font-medium text-fg/70 transition-colors hover:text-cy focus-visible:text-cy touch-manipulation"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
@@ -95,24 +109,83 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* Desktop CTA Button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.6 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="hidden md:block"
           >
             <Button
               variant="primary"
               size="sm"
               onClick={() => scrollToSection('cta')}
-              className="shadow-lg shadow-cy/30"
+              className="shadow-lg shadow-cy/30 min-h-[44px]"
             >
               Join Waitlist
             </Button>
           </motion.div>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden relative z-50 flex h-11 w-11 items-center justify-center rounded-lg bg-fg/10 text-fg transition-colors hover:bg-fg/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cy touch-manipulation"
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.div
+              className="absolute"
+              animate={isMobileMenuOpen ? { rotate: 90 } : { rotate: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isMobileMenuOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </motion.div>
+          </motion.button>
         </nav>
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={false}
+          animate={{
+            height: isMobileMenuOpen ? 'auto' : 0,
+            opacity: isMobileMenuOpen ? 1 : 0,
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="md:hidden overflow-hidden"
+        >
+          <div className="border-t border-fg/10 py-4 space-y-2">
+            {[
+              { href: 'how-it-works', label: 'How It Works' },
+              { href: 'features', label: 'Features' },
+              { href: 'tech', label: 'Technology' },
+              { href: 'cta', label: 'Join Waitlist' },
+            ].map((link) => (
+              <motion.a
+                key={link.href}
+                href={`#${link.href}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  scrollToSection(link.href)
+                }}
+                className="block px-4 py-3 text-base font-medium text-fg/70 transition-colors hover:text-cy hover:bg-fg/5 rounded-lg touch-manipulation min-h-[44px] flex items-center"
+              >
+                {link.label}
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
       </Container>
     </motion.header>
   )

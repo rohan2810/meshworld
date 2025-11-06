@@ -22,12 +22,36 @@
     @apply border-fg/10;
   }
   
+  html {
+    /* Prevent font size adjustment on iOS */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Smooth scrolling for mobile */
+    -webkit-overflow-scrolling: touch;
+  }
+  
   body {
     @apply bg-bg text-fg antialiased;
+    /* Prevent pull-to-refresh on mobile */
+    overscroll-behavior-y: contain;
+    /* Better touch scrolling */
+    -webkit-overflow-scrolling: touch;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight;
+  }
+
+  /* Better tap highlight on mobile */
+  button, a {
+    -webkit-tap-highlight-color: rgba(0, 245, 255, 0.2);
+    touch-action: manipulation;
+  }
+
+  /* Prevent text selection on buttons */
+  button {
+    user-select: none;
+    -webkit-user-select: none;
   }
 }
 
@@ -169,6 +193,13 @@
     scroll-snap-align: start;
     scroll-snap-stop: normal;
     contain: layout style paint;
+  }
+
+  /* Less aggressive scroll snap on mobile */
+  @media (max-width: 768px) {
+    .snap-section {
+      scroll-snap-align: none;
+    }
   }
 }
 
