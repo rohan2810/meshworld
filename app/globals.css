@@ -175,12 +175,38 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Scroll snap for slide-based sections */
 main {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Enhanced smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Smooth scroll with momentum */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  main {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+  
+  /* Better scroll performance */
+  .snap-section {
+    will-change: scroll-position;
+    transform: translateZ(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
