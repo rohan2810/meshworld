@@ -2,7 +2,6 @@
 
 import { Section } from '../_components/Section'
 import { FeatureCard } from '../_components/FeatureCard'
-import { AnimatedCounter } from '../_components/AnimatedCounter'
 import { MorphingBlob } from '../_components/MorphingBlob'
 import { Icon, GraphIcon, MultimodalIcon, PrivacyIcon } from '../_components/Icon'
 import { motion } from 'framer-motion'
@@ -12,7 +11,7 @@ export function Tech() {
     {
       title: 'Graph Intelligence',
       description:
-        'Neo4j or Weaviate stores nodes (experiences) and edges (relations). Every experience is a node, every connection tells a story.',
+        'Neural networks map your experiences into a living knowledge graph. Each moment becomes a node, every connection reveals hidden patterns. Your digital twin emerges from this web of memories.',
       icon: (
         <Icon>
           <GraphIcon />
@@ -20,9 +19,9 @@ export function Tech() {
       ),
     },
     {
-      title: 'Multimodal AI',
+      title: 'Multi-Agent AI',
       description:
-        'OpenAI API for LLM + embeddings, Hugging Face for emotion detection. Processes text, images, voice, and emotion.',
+        'Specialized agents work together: memory agents capture context, preference agents learn your taste, social agents find connections. Large language models power natural conversations with your twin.',
       icon: (
         <Icon>
           <MultimodalIcon />
@@ -32,7 +31,7 @@ export function Tech() {
     {
       title: 'Privacy by Design',
       description:
-        'Postgres + Weaviate (vector) + Neo4j (graph). User-owned encryption with a roadmap to local-first architecture.',
+        'Your twin is yours alone. End-to-end encryption protects your data. Agent reasoning happens on your device when possible. You control what you share and with whom.',
       icon: (
         <Icon>
           <PrivacyIcon />
@@ -65,42 +64,15 @@ export function Tech() {
             id="tech-heading"
             className="mb-6 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
           >
-            Built on the{' '}
+            Powered by{' '}
             <span className="text-gradient">
-              new stack
+              AI agents
             </span>{' '}
-            of understanding
+            and graph intelligence
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-fg/70">
-            Built with React Native (mobile-first), FastAPI/Node.js backend, and cutting-edge AI
-            that respects your privacy.
+            Advanced neural architectures, multi-agent reasoning systems, and knowledge graphs work together to understand your experiences, learn your preferences, and connect you with others through your digital twins.
           </p>
-        </motion.div>
-
-        {/* Metrics */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 grid gap-6 md:grid-cols-3"
-        >
-          {[
-            { value: 7000, suffix: '+', label: 'Experiences Captured', icon: '📍' },
-            { value: 12, suffix: ' months', label: 'Of Data', icon: '📅' },
-            { value: 1000, suffix: '+', label: 'AI Queries', icon: '💬' },
-          ].map((metric) => (
-            <div
-              key={metric.label}
-              className="glass-cy rounded-xl p-6 text-center"
-            >
-              <div className="mb-3 text-3xl">{metric.icon}</div>
-              <div className="mb-2 text-4xl font-bold text-cy">
-                <AnimatedCounter end={metric.value} suffix={metric.suffix} />
-              </div>
-              <h3 className="text-sm font-semibold text-fg">{metric.label}</h3>
-            </div>
-          ))}
         </motion.div>
 
         {/* Tech Cards */}

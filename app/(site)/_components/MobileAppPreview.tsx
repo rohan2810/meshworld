@@ -77,18 +77,28 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
 
 // Mockup Screen Components
 export function CheckInScreen() {
+  const [checkedIn, setCheckedIn] = useState(false)
+
   return (
     <div className="flex h-full flex-col bg-gradient-to-b from-bg to-bg/80">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-fg/10 bg-bg/50 p-4 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-cy to-vi" />
+          <motion.div 
+            className="h-8 w-8 rounded-full bg-gradient-to-br from-cy to-vi"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
           <div>
             <div className="mb-1 h-3 w-20 rounded bg-fg/20" />
             <div className="h-2 w-16 rounded bg-fg/10" />
           </div>
         </div>
-        <div className="h-8 w-8 rounded-full bg-cy/20" />
+        <motion.div 
+          className="h-8 w-8 rounded-full bg-cy/20"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        />
       </div>
 
       {/* Map View */}
@@ -175,28 +185,53 @@ export function CheckInScreen() {
 
       {/* Bottom Action Bar */}
       <div className="border-t border-fg/10 bg-bg/80 p-4 backdrop-blur-sm">
-        <div className="mb-3 flex items-center gap-3 rounded-xl bg-gradient-to-r from-cy/20 to-vi/20 p-3">
+        <motion.div 
+          className="mb-3 flex items-center gap-3 rounded-xl bg-gradient-to-r from-cy/20 to-vi/20 p-3"
+          animate={checkedIn ? { scale: [1, 1.02, 1] } : {}}
+          transition={{ duration: 0.3 }}
+        >
           <div className="h-10 w-10 rounded-full bg-cy/30" />
           <div className="flex-1">
             <div className="mb-1 h-3 w-32 rounded bg-fg/20" />
             <div className="h-2 w-24 rounded bg-fg/10" />
           </div>
           <motion.button
-            className="rounded-full bg-gradient-to-r from-cy to-vi px-6 py-2 text-sm font-semibold text-bg shadow-lg"
+            onClick={() => setCheckedIn(!checkedIn)}
+            className={cn(
+              "rounded-full px-6 py-2 text-sm font-semibold shadow-lg transition-all",
+              checkedIn
+                ? "bg-green-500/30 text-green-400"
+                : "bg-gradient-to-r from-cy to-vi text-bg"
+            )}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Check In
+            {checkedIn ? "✓ Checked In" : "Check In"}
           </motion.button>
-        </div>
+        </motion.div>
         <div className="flex items-center justify-between text-xs text-fg/60">
           <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded-full bg-green-500/60" />
-            <span>Last checked in 2h ago</span>
+            <motion.div 
+              className={cn(
+                "h-3 w-3 rounded-full transition-colors",
+                checkedIn ? "bg-green-500" : "bg-green-500/60"
+              )}
+              animate={checkedIn ? { scale: [1, 1.2, 1] } : {}}
+              transition={{ duration: 0.3 }}
+            />
+            <span>{checkedIn ? "Just checked in" : "Last checked in 2h ago"}</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="h-4 w-4 rounded bg-fg/20" />
-            <div className="h-4 w-4 rounded bg-fg/20" />
+            <motion.div 
+              className="h-4 w-4 rounded bg-fg/20"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            />
+            <motion.div 
+              className="h-4 w-4 rounded bg-fg/20"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            />
           </div>
         </div>
       </div>
@@ -436,6 +471,313 @@ export function ChatScreen() {
             <div className="flex h-full w-full items-center justify-center text-bg">
               →
             </div>
+          </motion.button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function LocationCaptureScreen() {
+  const [selectedMood, setSelectedMood] = useState<string | null>(null)
+  const [selectedCompanion, setSelectedCompanion] = useState<string | null>(null)
+  const [checkedIn, setCheckedIn] = useState(false)
+
+  return (
+    <div className="flex h-full flex-col bg-gradient-to-b from-bg to-bg/80">
+      <div className="border-b border-fg/10 bg-bg/50 p-4 backdrop-blur-sm">
+        <div className="mb-2 flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-fg">Current Location</h3>
+          <div className="flex gap-2">
+            <motion.div 
+              className="h-8 w-8 rounded-full bg-cy/20"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <div className="h-8 w-8 rounded-full bg-fg/10" />
+          </div>
+        </div>
+        <p className="text-sm text-fg/60">Mission Beach, San Diego</p>
+      </div>
+
+      <div className="flex-1 p-4">
+        <motion.div 
+          className="mb-4 rounded-xl bg-gradient-to-br from-cy/20 to-vi/10 p-4"
+          animate={checkedIn ? { scale: [1, 1.02, 1] } : {}}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="mb-3 flex items-start gap-3">
+            <div className="h-12 w-12 rounded-full bg-cy/40" />
+            <div className="flex-1">
+              <h4 className="mb-1 font-semibold text-fg">Café Luna</h4>
+              <p className="text-xs text-fg/60">Coffee Shop • 0.2 mi away</p>
+            </div>
+            <div className="rounded-full bg-green-500/20 px-2 py-1 text-xs text-green-400">
+              Open
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setCheckedIn(!checkedIn)}
+            className={cn(
+              "mb-3 w-full rounded-full py-3 font-semibold shadow-lg transition-all",
+              checkedIn
+                ? "bg-green-500/30 text-green-400"
+                : "bg-gradient-to-r from-cy to-vi text-bg"
+            )}
+          >
+            {checkedIn ? "✓ Checked In" : "👆 I'm Here"}
+          </motion.button>
+
+          <div className="mb-3">
+            <p className="mb-2 text-xs font-medium text-fg/70">Quick mood:</p>
+            <div className="flex flex-wrap gap-2">
+              {['😌 Relaxed', '😊 Happy', '🤔 Focused', '😴 Tired'].map((mood) => (
+                <motion.button
+                  key={mood}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedMood(mood)}
+                  className={cn(
+                    "rounded-full px-3 py-1 text-xs transition-all",
+                    selectedMood === mood
+                      ? "bg-cy/30 text-cy ring-2 ring-cy/50"
+                      : "bg-fg/10 text-fg/70 hover:bg-cy/20 hover:text-cy"
+                  )}
+                >
+                  {mood}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-xs font-medium text-fg/70">With:</p>
+            <div className="flex gap-2">
+              {['👤 Solo', '👥 Friends', '👨‍👩‍👧 Family'].map((comp) => (
+                <motion.button
+                  key={comp}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedCompanion(comp)}
+                  className={cn(
+                    "rounded-full px-3 py-1 text-xs transition-all",
+                    selectedCompanion === comp
+                      ? "bg-vi/30 text-vi ring-2 ring-vi/50"
+                      : "bg-fg/10 text-fg/70 hover:bg-cy/20 hover:text-cy"
+                  )}
+                >
+                  {comp}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        <div>
+          <p className="mb-2 text-sm font-medium text-fg/70">Recent</p>
+          {[
+            { name: 'Beach Park', time: '2h ago', mood: '🌊' },
+            { name: 'Art Gallery', time: 'Yesterday', mood: '🎨' },
+          ].map((place) => (
+            <div
+              key={place.name}
+              className="mb-2 flex items-center gap-3 rounded-lg bg-fg/5 p-2"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-vi/20 text-sm">
+                {place.mood}
+              </div>
+              <div className="flex-1">
+                <div className="text-sm font-medium text-fg">{place.name}</div>
+                <div className="text-xs text-fg/50">{place.time}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex border-t border-fg/10 bg-bg/80 backdrop-blur-sm">
+        {['🏠', '📍', '🗺️', '👤'].map((icon, i) => (
+          <button
+            key={i}
+            className={cn(
+              'flex-1 py-3 text-center text-xl',
+              i === 1 ? 'text-cy' : 'text-fg/40'
+            )}
+          >
+            {icon}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function EventCaptureScreen() {
+  const [selectedFeeling, setSelectedFeeling] = useState('😍')
+  const [selectedAgain, setSelectedAgain] = useState('⭐ Definitely')
+  const [selectedCompanions, setSelectedCompanions] = useState(['👥 Friends'])
+  const [saved, setSaved] = useState(false)
+
+  const toggleCompanion = (comp: string) => {
+    setSelectedCompanions(prev =>
+      prev.includes(comp) ? prev.filter(c => c !== comp) : [...prev, comp]
+    )
+  }
+
+  return (
+    <div className="flex h-full flex-col bg-gradient-to-b from-bg to-bg/80">
+      <div className="border-b border-fg/10 bg-bg/50 p-4 backdrop-blur-sm">
+        <div className="mb-1 text-xs text-fg/50">Just finished</div>
+        <h3 className="text-lg font-semibold text-fg">Jazz Night at The Casbah</h3>
+        <p className="text-sm text-fg/60">8:00 PM - 11:30 PM</p>
+      </div>
+
+      <div className="flex-1 overflow-auto p-4">
+        <motion.div 
+          className="mb-4 rounded-xl bg-gradient-to-br from-vi/20 to-am/10 p-4"
+          animate={saved ? { scale: [1, 1.02, 1] } : {}}
+        >
+          <div className="mb-3 flex items-center gap-2">
+            <motion.div 
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-vi/30 text-xl"
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              🎵
+            </motion.div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-fg">How was it?</h4>
+              <p className="text-xs text-fg/60">Quick reflection</p>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <p className="mb-2 text-sm font-medium text-fg">How did you feel?</p>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { emoji: '😍', label: 'Amazing' },
+                { emoji: '😊', label: 'Great' },
+                { emoji: '🙂', label: 'Good' },
+                { emoji: '😐', label: 'Okay' },
+              ].map((mood) => (
+                <motion.button
+                  key={mood.label}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedFeeling(mood.emoji)}
+                  className={cn(
+                    'rounded-xl py-3 font-medium transition-all',
+                    selectedFeeling === mood.emoji
+                      ? 'bg-gradient-to-r from-vi to-am text-bg shadow-lg ring-2 ring-vi/50'
+                      : 'bg-fg/10 text-fg/70 hover:bg-fg/20'
+                  )}
+                >
+                  <div className="mb-1 text-2xl">{mood.emoji}</div>
+                  <div className="text-xs">{mood.label}</div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <p className="mb-2 text-sm font-medium text-fg">Would you do it again?</p>
+            <div className="flex gap-2">
+              {['⭐ Definitely', '🤔 Maybe', '👎 No'].map((option) => (
+                <motion.button
+                  key={option}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedAgain(option)}
+                  className={cn(
+                    'flex-1 rounded-lg py-2 text-xs font-medium transition-all',
+                    selectedAgain === option
+                      ? 'bg-vi/30 text-vi ring-2 ring-vi/50'
+                      : 'bg-fg/10 text-fg/60 hover:bg-fg/20'
+                  )}
+                >
+                  {option}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <p className="mb-2 text-sm font-medium text-fg">Who were you with?</p>
+            <div className="flex flex-wrap gap-2">
+              {['👤 Solo', '👥 Friends', '👨‍👩‍👧 Family', '💼 Colleagues'].map((comp) => (
+                <motion.button
+                  key={comp}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => toggleCompanion(comp)}
+                  className={cn(
+                    'rounded-full px-3 py-1 text-xs font-medium transition-all',
+                    selectedCompanions.includes(comp)
+                      ? 'bg-vi/30 text-vi ring-2 ring-vi/50'
+                      : 'bg-fg/10 text-fg/60 hover:bg-fg/20'
+                  )}
+                >
+                  {comp}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-sm font-medium text-fg">Any highlights?</p>
+            <div className="space-y-2">
+              <button className="w-full rounded-lg bg-fg/10 py-3 text-sm text-fg/70 hover:bg-fg/20">
+                💭 Add a note
+              </button>
+              <button className="w-full rounded-lg bg-fg/10 py-3 text-sm text-fg/70 hover:bg-fg/20">
+                📸 Add photos
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="rounded-xl border border-am/30 bg-am/5 p-3">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="text-lg">🤖</span>
+            <span className="text-xs font-medium text-fg/70">AI detected:</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {['🎸 Live music', '🌃 Nightlife', '🎭 Entertainment'].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full bg-am/20 px-2 py-1 text-xs text-am"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-fg/10 bg-bg/80 p-4 backdrop-blur-sm">
+        <div className="flex gap-2">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex-1 rounded-full border border-fg/20 py-2 text-sm text-fg/60 hover:bg-fg/5"
+          >
+            Skip
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setSaved(!saved)}
+            className={cn(
+              "flex-1 rounded-full py-2 text-sm font-semibold shadow-lg transition-all",
+              saved
+                ? "bg-green-500/30 text-green-400"
+                : "bg-gradient-to-r from-vi to-am text-bg"
+            )}
+          >
+            {saved ? '✓ Saved' : 'Save Reflection'}
           </motion.button>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Section } from '../_components/Section'
-import { MobileAppPreview, CheckInScreen, ChatScreen } from '../_components/MobileAppPreview'
+import { MobileAppPreview, ChatScreen, LocationCaptureScreen, EventCaptureScreen } from '../_components/MobileAppPreview'
 import { DigitalTwinVisualization } from '../_components/DigitalTwinVisualization'
 import { TwinInteractionDemo } from '../_components/TwinInteractionDemo'
 import { FloatingParticles } from '../_components/FloatingParticles'
@@ -16,17 +16,18 @@ const steps = [
     step: 1,
     title: 'Capture',
     subtitle: 'Your experiences',
-    description: 'Import visits from Google Maps Timeline or use simple check-ins. Every location becomes a node in your memory graph.',
+    description: 'Two ways to capture: Location-based (Google Maps Timeline or "I\'m here" check-ins) or Event-based (calendar-triggered reflection prompts after events).',
     color: 'cy',
-    visual: 'mobile',
-    mobileScreen: <CheckInScreen />,
+    visual: 'mobile-dual',
+    mobileScreens: [<LocationCaptureScreen key="location" />, <EventCaptureScreen key="event" />],
+    screenTitles: ['Location-Based', 'Event-Based'],
   },
   {
     id: 'learn',
     step: 2,
     title: 'Learn',
-    subtitle: 'Your digital twin',
-    description: 'AI learns from your patterns, builds a preference vector, and identifies what makes you happy, curious, or relaxed.',
+    subtitle: 'Your digital twin evolves',
+    description: 'As you capture experiences, AI agents analyze patterns, preferences, and emotional responses. Your digital twin builds a living understanding of what resonates with you—identifying hidden connections between places, people, and moments.',
     color: 'vi',
     visual: 'graph',
     showLearning: true,
@@ -35,8 +36,8 @@ const steps = [
     id: 'reflect',
     step: 3,
     title: 'Reflect',
-    subtitle: 'With your AI agent',
-    description: 'Ask anything about your experiences. "Where did I spend most time?" "Find me a dinner spot I\'d love." Get intelligent answers.',
+    subtitle: 'Your AI companion',
+    description: 'Chat with your intelligent agent that knows your history. Ask "What restaurants do I love?" or "Plan a weekend I\'d enjoy." Get personalized insights, rediscover forgotten moments, and receive recommendations tailored to your unique taste.',
     color: 'am',
     visual: 'mobile',
     mobileScreen: <ChatScreen />,
@@ -146,7 +147,18 @@ export function HowItWorks() {
             transition={{ duration: 0.5 }}
             className="flex justify-center"
           >
-            {steps[activeStep].visual === 'mobile' && steps[activeStep].mobileScreen ? (
+            {steps[activeStep].visual === 'mobile-dual' && steps[activeStep].mobileScreens ? (
+              <MobileAppPreview
+                screens={steps[activeStep].mobileScreens.map((screen, idx) => ({
+                  id: `${steps[activeStep].id}-${idx}`,
+                  title: steps[activeStep].screenTitles?.[idx] || steps[activeStep].title,
+                  description: idx === 0 
+                    ? 'Auto-import from Google Maps or tap "I\'m here" to check in'
+                    : 'Calendar-triggered reflection prompts after events end',
+                  mockup: screen,
+                }))}
+              />
+            ) : steps[activeStep].visual === 'mobile' && steps[activeStep].mobileScreen ? (
               <MobileAppPreview
                 screens={[
                   {
