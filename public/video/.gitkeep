@@ -1,0 +1,10 @@
+# Placeholder for video assets
+# Replace with:
+# - hero-loop.mp4: Background video for hero section (recommended: 1920x1080, < 5MB, ~10s loop)
+# 
+# Tips for video:
+# - Keep it subtle and slow-moving
+# - Use H.264 codec for best browser compatibility
+# - Compress with handbrake or ffmpeg
+# - Consider creating a poster image (first frame as JPG)
+

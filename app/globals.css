@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0A0E1A;
+  --bg2: #0F1525;
+  --fg: #F0F4F8;
+  --fg2: #CBD5E0;
+  --cy: #00F5FF;
+  --cy2: #00D9E5;
+  --vi: #B794F6;
+  --vi2: #9F7AEA;
+  --am: #FFD700;
+  --am2: #FFC107;
+  --pink: #FF6B9D;
+  --purple: #8B5CF6;
+}
+
+@layer base {
+  * {
+    @apply border-fg/10;
+  }
+  
+  body {
+    @apply bg-bg text-fg antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glow-cy {
+    text-shadow: 0 0 40px rgba(0, 245, 255, 0.6), 0 0 80px rgba(0, 245, 255, 0.3);
+  }
+
+  .glow-vi {
+    text-shadow: 0 0 40px rgba(183, 148, 246, 0.6), 0 0 80px rgba(183, 148, 246, 0.3);
+  }
+
+  .glow-am {
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.3);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #00F5FF 0%, #B794F6 50%, #FFD700 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 3s linear infinite;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .radial-glow {
+    background: radial-gradient(circle at center, rgba(0, 245, 255, 0.2) 0%, transparent 70%);
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .radial-glow-vi {
+    background: radial-gradient(circle at center, rgba(183, 148, 246, 0.25) 0%, transparent 70%);
+    animation: pulse-glow 3s ease-in-out infinite 0.5s;
+  }
+
+  .radial-glow-am {
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+    animation: pulse-glow 3s ease-in-out infinite 1s;
+  }
+
+  .glass {
+    background: rgba(10, 14, 26, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(240, 244, 248, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .glass:hover {
+    background: rgba(10, 14, 26, 0.9);
+    border-color: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 245, 255, 0.1);
+  }
+
+  .glass-cy {
+    background: rgba(0, 245, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .glass-cy:hover {
+    background: rgba(0, 245, 255, 0.12);
+    border-color: rgba(0, 245, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 245, 255, 0.2);
+  }
+
+  .neon-glow {
+    box-shadow: 
+      0 0 20px rgba(0, 245, 255, 0.6),
+      0 0 40px rgba(0, 245, 255, 0.4),
+      0 0 60px rgba(0, 245, 255, 0.2);
+    transition: all 0.3s ease;
+    animation: neonPulse 3s ease-in-out infinite;
+  }
+
+  .neon-glow:hover {
+    box-shadow: 
+      0 0 30px rgba(0, 245, 255, 0.8),
+      0 0 60px rgba(0, 245, 255, 0.6),
+      0 0 90px rgba(0, 245, 255, 0.4),
+      0 0 120px rgba(0, 245, 255, 0.2);
+    animation: neonPulseHover 1.5s ease-in-out infinite;
+  }
+
+  .neon-glow-vi {
+    box-shadow: 
+      0 0 20px rgba(183, 148, 246, 0.6),
+      0 0 40px rgba(183, 148, 246, 0.4),
+      0 0 60px rgba(183, 148, 246, 0.2);
+    transition: all 0.3s ease;
+    animation: neonPulse 3s ease-in-out infinite;
+  }
+
+  .neon-glow-vi:hover {
+    box-shadow: 
+      0 0 30px rgba(183, 148, 246, 0.8),
+      0 0 60px rgba(183, 148, 246, 0.6),
+      0 0 90px rgba(183, 148, 246, 0.4),
+      0 0 120px rgba(183, 148, 246, 0.2);
+    animation: neonPulseHover 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes neonPulse {
+    0%, 100% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.3);
+    }
+  }
+
+  @keyframes neonPulseHover {
+    0%, 100% {
+      filter: brightness(1.2);
+    }
+    50% {
+      filter: brightness(1.5);
+    }
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* Smooth scrolling with offset for fixed header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Scroll snap for slide-based sections */
+main {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible styles */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-cy ring-0;
+}
+
+/* Particle background effect */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(88, 255, 224, 0.5);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced gradient meshes */
+.gradient-mesh {
+  background: 
+    radial-gradient(at 20% 30%, rgba(0, 245, 255, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 70%, rgba(183, 148, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(255, 215, 0, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(255, 107, 157, 0.08) 0px, transparent 50%);
+  animation: gradientXY 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Parallax effect */
+.parallax {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Enhanced button hover effects */
+button, a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, a:hover {
+  transform: translateY(-2px);
+}
+
+button:active, a:active {
+  transform: translateY(0);
+}
+
+/* Custom cursor styles */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.8) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  }
+  
+  .cursor-trail {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 245, 255, 0.6);
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: screen;
+  }
+}
+

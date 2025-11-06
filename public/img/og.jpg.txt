@@ -1,0 +1,14 @@
+This is a placeholder for og.jpg
+Create a 1200x630px image for Open Graph social sharing.
+
+Suggested content:
+- MeshWorld logo
+- Tagline: "A new dimension of human experience"
+- Dark background with gradient accents
+- Modern, cinematic aesthetic
+
+Tools:
+- Canva (canva.com)
+- Figma (figma.com)
+- Photoshop
+
