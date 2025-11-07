@@ -42,7 +42,7 @@ export function Problem() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-1 text-lg">🧠</span>
-              <span>Generic recommendation apps don't actually know you.</span>
+              <span>Generic recommendation apps don&apos;t actually know you.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-1 text-lg">🤝</span>

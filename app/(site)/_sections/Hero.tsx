@@ -248,7 +248,7 @@ export function Hero() {
                   <span className="text-xs font-medium text-fg/70">Your AI Twin</span>
                 </div>
                 <p className="text-sm text-fg/80 leading-relaxed">
-                  Most of your happiest moments are near the water. Here are 3 new places you'd love this month.
+                  Most of your happiest moments are near the water. Here are 3 new places you&apos;d love this month.
                 </p>
               </div>
             </div>

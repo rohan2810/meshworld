@@ -57,7 +57,7 @@ export function Tech() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-1 text-cy">•</span>
-              <span>All of this is tied to your account, with clear controls over what's stored and shared.</span>
+              <span>All of this is tied to your account, with clear controls over what&apos;s stored and shared.</span>
             </li>
           </ul>
         </motion.div>

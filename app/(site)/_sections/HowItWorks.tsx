@@ -1,17 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Section } from '../_components/Section'
 import { MobileAppPreview, ChatScreen, LocationCaptureScreen, EventCaptureScreen } from '../_components/MobileAppPreview'
 import { DigitalTwinVisualization } from '../_components/DigitalTwinVisualization'
-import { TwinInteractionDemo } from '../_components/TwinInteractionDemo'
 import { FloatingParticles } from '../_components/FloatingParticles'
 import { MorphingBlob } from '../_components/MorphingBlob'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 // Controlled version of MobileAppPreview for step 1
-function ControlledMobilePreview({ screens, activeScreen }: { screens: any[], activeScreen: number }) {
+function ControlledMobilePreview({ screens, activeScreen }: { screens: Array<{ id: string; title: string; description: string; mockup: React.ReactNode }>, activeScreen: number }) {
   return (
     <div className="relative">
       <div className="relative mx-auto w-[280px] md:w-[320px]">

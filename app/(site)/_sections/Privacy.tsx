@@ -44,7 +44,7 @@ export function Privacy() {
             className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
           >
             Private by design, or it{' '}
-            <span className="text-gradient">doesn't ship</span>.
+            <span className="text-gradient">doesn&apos;t ship</span>.
           </h2>
         </motion.div>
 
