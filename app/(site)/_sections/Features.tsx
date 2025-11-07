@@ -2,46 +2,37 @@
 
 import { Section } from '../_components/Section'
 import { FeatureCard } from '../_components/FeatureCard'
-import { MobileAppPreview, CheckInScreen, GraphScreen, ChatScreen } from '../_components/MobileAppPreview'
 import { MorphingBlob } from '../_components/MorphingBlob'
-import { Icon, CaptureIcon, NetworkIcon, ReflectionIcon } from '../_components/Icon'
+import { Icon, NetworkIcon, ReflectionIcon } from '../_components/Icon'
 import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 export function Features() {
   const features = [
     {
-      title: 'Smart Check-ins',
-      description: 'Simple "I\'m here" button or timeline import from Google Maps.',
-      icon: (
-        <Icon>
-          <CaptureIcon />
-        </Icon>
-      ),
-      mvp: true,
-    },
-    {
       title: 'Personal Memory Graph',
-      description: 'Visual timeline of visited places, moods, and connections. Your experiences form a living network.',
+      description: "A timeline + map of where you've been, how you felt, and who you were with — all in one place.",
+      badge: 'MVP',
       icon: (
         <Icon>
           <NetworkIcon />
         </Icon>
       ),
-      mvp: true,
     },
     {
       title: 'AI Reflection Agent',
-      description: 'Conversational queries for recall and planning. Ask anything about your experiences.',
+      description: 'Spot patterns in your time: routines, happy places, energy drains, and hidden favorites.',
+      badge: 'MVP',
       icon: (
         <Icon>
           <ReflectionIcon />
         </Icon>
       ),
-      mvp: true,
     },
     {
       title: 'Personalized Recommendations',
-      description: 'New places aligned with your taste profile. Discover experiences you\'ll love.',
+      description: 'New cafés, walks, and spots based on your real behavior, not generic city lists.',
+      badge: 'MVP',
       icon: (
         <Icon>
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,11 +40,11 @@ export function Features() {
           </svg>
         </Icon>
       ),
-      mvp: true,
     },
     {
       title: 'Twin Collaboration',
-      description: 'Connect with others. AI suggests mutual plans based on merged preference graphs.',
+      description: 'When you connect, your twins find overlap and suggest plans that work for everyone — without exposing raw data.',
+      badge: 'Coming soon',
       icon: (
         <Icon>
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,12 +52,23 @@ export function Features() {
           </svg>
         </Icon>
       ),
-      mvp: false,
+    },
+    {
+      title: 'Emotion & Novelty Metrics',
+      description: 'See what types of experiences make you happiest, and how often you try something new.',
+      badge: 'Coming soon',
+      icon: (
+        <Icon>
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </Icon>
+      ),
     },
   ]
 
   return (
-    <Section id="features" aria-labelledby="features-heading" className="bg-bg/50 overflow-hidden" fullScreen>
+    <Section id="features" aria-labelledby="features-heading" className="bg-bg/50 overflow-hidden">
       {/* Background effects */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <MorphingBlob color="vi" size="lg" />
@@ -80,57 +82,24 @@ export function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-10 text-center"
         >
           <h2
             id="features-heading"
-            className="mb-6 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
+            className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
           >
-            Everything you need to{' '}
+            Product{' '}
             <span className="text-gradient">
-              remember and connect
+              Features
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-fg/70">
-            A complete platform for capturing experiences, understanding patterns, and discovering
-            shared moments with others.
+            Outcome-based features that help you remember, understand, discover, and connect.
           </p>
         </motion.div>
 
-        {/* Mobile Preview */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 flex justify-center"
-        >
-          <MobileAppPreview
-            screens={[
-              {
-                id: 'checkin',
-                title: 'Smart Check-ins',
-                description: 'Capture experiences with one tap',
-                mockup: <CheckInScreen />,
-              },
-              {
-                id: 'graph',
-                title: 'Memory Graph',
-                description: 'Visualize your experiences',
-                mockup: <GraphScreen />,
-              },
-              {
-                id: 'chat',
-                title: 'AI Reflection',
-                description: 'Ask questions and get insights',
-                mockup: <ChatScreen />,
-              },
-            ]}
-          />
-        </motion.div>
-
         {/* Feature Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -146,11 +115,14 @@ export function Features() {
                   icon={feature.icon}
                   index={index}
                 />
-                {feature.mvp && (
-                  <div className="absolute top-4 right-4 rounded-full bg-cy/20 px-2 py-1 text-xs font-medium text-cy">
-                    MVP
-                  </div>
-                )}
+                <div className={cn(
+                  "absolute top-4 right-4 rounded-full px-2.5 py-1 text-xs font-medium min-w-[90px] text-center",
+                  feature.badge === 'MVP'
+                    ? "bg-cy/20 text-cy"
+                    : "border border-fg/30 bg-transparent text-fg/60"
+                )}>
+                  {feature.badge}
+                </div>
               </div>
             </motion.div>
           ))}

@@ -59,17 +59,19 @@ export function TwinInteractionDemo() {
       {/* Stage Indicators */}
       <div className="mb-8 flex justify-center gap-2">
         {['Users', 'Analyzing', 'Shared', 'Recommendation'].map((label, i) => (
-          <div
+          <button
             key={i}
+            onClick={() => setStage(i)}
             className={cn(
-              'rounded-full px-4 py-2 text-xs font-medium transition-all duration-300',
+              'rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 cursor-pointer hover:scale-105',
               stage === i
                 ? 'bg-gradient-to-r from-cy to-vi text-bg scale-110'
-                : 'bg-fg/10 text-fg/50'
+                : 'bg-fg/10 text-fg/50 hover:bg-fg/20'
             )}
+            aria-label={`View ${label} stage`}
           >
             {label}
-          </div>
+          </button>
         ))}
       </div>
 

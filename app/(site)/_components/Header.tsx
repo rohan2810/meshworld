@@ -73,7 +73,7 @@ export function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <span className="text-gradient">
-              MeshWorld
+              SetuAI
             </span>
           </motion.a>
 
@@ -82,6 +82,7 @@ export function Header() {
             {[
               { href: 'how-it-works', label: 'How It Works' },
               { href: 'features', label: 'Features' },
+              { href: 'use-cases', label: 'Use Cases' },
               { href: 'tech', label: 'Technology' },
               { href: 'cta', label: 'Join' },
             ].map((link, index) => (
@@ -168,6 +169,7 @@ export function Header() {
             {[
               { href: 'how-it-works', label: 'How It Works' },
               { href: 'features', label: 'Features' },
+              { href: 'use-cases', label: 'Use Cases' },
               { href: 'tech', label: 'Technology' },
               { href: 'cta', label: 'Join Waitlist' },
             ].map((link) => (

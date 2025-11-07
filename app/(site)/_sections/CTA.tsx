@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 
 export function CTA() {
   return (
-    <Section id="cta" aria-labelledby="cta-heading" className="bg-bg overflow-hidden" fullScreen>
+    <Section id="cta" aria-labelledby="cta-heading" className="bg-bg overflow-hidden">
       {/* Background effects */}
       <FloatingParticles />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -29,20 +29,19 @@ export function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
+          className="mb-8 text-center"
         >
           <h2
             id="cta-heading"
-            className="mb-6 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
+            className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
           >
-            Be among the{' '}
+            Get{' '}
             <span className="text-gradient">
-              first to explore
+              early access
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-fg/70">
-            Join our waitlist to get early access when we launch. Help shape the future of personal
-            intelligence.
+            Join the waitlist to help shape SetuAI and be the first to try the beta.
           </p>
         </motion.div>
 

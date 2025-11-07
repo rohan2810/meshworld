@@ -1,37 +1,38 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ 
+const plusJakartaSans = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
-  title: 'MeshWorld — A new dimension of human experience',
-  description: 'Turn your life into a living digital twin. Capture, reflect, and connect through an intelligent experience graph.',
-  metadataBase: new URL('https://meshworld.com'),
+  title: 'SetuAI - Bridging Human, Data, and Experiences',
+  description: 'SetuAI - Bridging Human, Data, and Experiences',
+  metadataBase: new URL('https://setuai.app'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://meshworld.com',
-    siteName: 'MeshWorld',
-    title: 'MeshWorld — A new dimension of human experience',
-    description: 'Turn your life into a living digital twin. Capture, reflect, and connect through an intelligent experience graph.',
+    url: 'https://setuai.app',
+    siteName: 'SetuAI',
+    title: 'SetuAI - Bridging Human, Data, and Experiences',
+    description: 'SetuAI - Bridging Human, Data, and Experiences',
     images: [
       {
         url: '/img/og.jpg',
         width: 1200,
         height: 630,
-        alt: 'MeshWorld',
+        alt: 'SetuAI',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MeshWorld — A new dimension of human experience',
-    description: 'Turn your life into a living digital twin. Capture, reflect, and connect through an intelligent experience graph.',
+    title: 'SetuAI - Bridging Human, Data, and Experiences',
+    description: 'SetuAI - Bridging Human, Data, and Experiences',
     images: ['/img/og.jpg'],
   },
 }
@@ -49,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={plusJakartaSans.variable}>
       <body>{children}</body>
     </html>
   )

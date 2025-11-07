@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -18,6 +18,25 @@ interface MobileAppPreviewProps {
 
 export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) {
   const [activeScreen, setActiveScreen] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  // Auto-rotate screens every 5 seconds if there are multiple screens
+  useEffect(() => {
+    if (screens.length <= 1 || isPaused) return
+
+    const interval = setInterval(() => {
+      setActiveScreen((prev) => (prev + 1) % screens.length)
+    }, 5000) // Change every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [screens.length, isPaused])
+
+  const handleScreenChange = (index: number) => {
+    setActiveScreen(index)
+    setIsPaused(true)
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000)
+  }
 
   return (
     <div className={cn('relative', className)}>
@@ -53,10 +72,10 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
           {screens.map((_, index) => (
             <button
               key={index}
-              onClick={() => setActiveScreen(index)}
+              onClick={() => handleScreenChange(index)}
               className={cn(
-                'h-2 rounded-full transition-all',
-                index === activeScreen ? 'w-8 bg-cy' : 'w-2 bg-fg/30'
+                'h-2 rounded-full transition-all cursor-pointer',
+                index === activeScreen ? 'w-8 bg-cy' : 'w-2 bg-fg/30 hover:bg-fg/50'
               )}
               aria-label={`View ${screens[index].title}`}
             />

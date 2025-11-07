@@ -26,7 +26,7 @@ export function Section({
       aria-labelledby={ariaLabelledBy}
       className={cn(
         'relative snap-section',
-        fullScreen ? 'min-h-screen flex items-center' : 'py-20 lg:py-32',
+        fullScreen ? 'min-h-screen flex items-center' : 'py-8 lg:py-12',
         className
       )}
     >

@@ -6,8 +6,17 @@ import { Button } from './Button'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 
+const useCaseOptions = [
+  'Solo exploring',
+  'With partner/friends',
+  'Travel',
+  'Self-reflection / journaling',
+  'Just curious',
+]
+
 export function WaitlistForm() {
   const [email, setEmail] = useState('')
+  const [useCase, setUseCase] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -23,11 +32,12 @@ export function WaitlistForm() {
     setStatus('loading')
     setErrorMessage('')
 
-    const result = await addToWaitlist(email)
+    const result = await addToWaitlist(email, useCase || undefined)
 
     if (result.success) {
       setStatus('success')
       setEmail('')
+      setUseCase('')
     } else {
       setStatus('error')
       setErrorMessage(result.error || 'An error occurred. Please try again.')
@@ -52,7 +62,7 @@ export function WaitlistForm() {
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="space-y-3">
             <label htmlFor="email" className="sr-only">
               Email address
             </label>
@@ -65,22 +75,46 @@ export function WaitlistForm() {
               required
               disabled={status === 'loading'}
               className={cn(
-                'flex-1 rounded-lg border border-fg/20 bg-bg/50 px-4 py-3 text-fg placeholder:text-fg/40 backdrop-blur-sm transition-all',
+                'w-full rounded-lg border border-fg/20 bg-bg/50 px-4 py-3 text-fg placeholder:text-fg/40 backdrop-blur-sm transition-all',
                 'focus:border-cy focus:outline-none focus:ring-2 focus:ring-cy/20',
                 'disabled:cursor-not-allowed disabled:opacity-50'
               )}
               aria-invalid={status === 'error'}
               aria-describedby={status === 'error' ? 'email-error' : undefined}
             />
-            <Button
-              type="submit"
-              variant="primary"
+            
+            <label htmlFor="use-case" className="sr-only">
+              How would you mainly use MeshWorld?
+            </label>
+            <select
+              id="use-case"
+              value={useCase}
+              onChange={(e) => setUseCase(e.target.value)}
               disabled={status === 'loading'}
-              className="min-w-[140px]"
+              className={cn(
+                'w-full rounded-lg border border-fg/20 bg-bg/50 px-4 py-3 text-fg backdrop-blur-sm transition-all',
+                'focus:border-cy focus:outline-none focus:ring-2 focus:ring-cy/20',
+                'disabled:cursor-not-allowed disabled:opacity-50',
+                !useCase && 'text-fg/40'
+              )}
             >
-              {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
-            </Button>
+              <option value="">How would you mainly use MeshWorld? (optional)</option>
+              {useCaseOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
+
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={status === 'loading'}
+            className="w-full"
+          >
+            {status === 'loading' ? 'Joining...' : 'Join the waitlist'}
+          </Button>
 
           {status === 'error' && (
             <motion.div
@@ -96,7 +130,7 @@ export function WaitlistForm() {
           )}
 
           <p className="text-center text-xs text-fg/50">
-            No spam. We&apos;ll only email launch updates.
+            No spam. Occasional build updates + an invite when we&apos;re ready.
           </p>
         </form>
       )}

@@ -10,10 +10,14 @@ export const supabase: SupabaseClient | null =
 export type WaitlistEntry = {
   id?: string
   email: string
+  use_case?: string
   created_at?: string
 }
 
-export async function addToWaitlist(email: string): Promise<{ success: boolean; error?: string }> {
+export async function addToWaitlist(
+  email: string,
+  useCase?: string
+): Promise<{ success: boolean; error?: string }> {
   if (!supabase || !supabaseUrl || !supabaseAnonKey) {
     return {
       success: false,
@@ -22,9 +26,12 @@ export async function addToWaitlist(email: string): Promise<{ success: boolean; 
   }
 
   try {
-    const { error } = await supabase
-      .from('waitlist')
-      .insert([{ email }])
+    const entry: { email: string; use_case?: string } = { email }
+    if (useCase) {
+      entry.use_case = useCase
+    }
+
+    const { error } = await supabase.from('waitlist').insert([entry])
 
     if (error) {
       // Handle duplicate email

@@ -23,7 +23,7 @@ const config: Config = {
         purple: '#8B5CF6',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
