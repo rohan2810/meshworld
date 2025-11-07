@@ -18,30 +18,30 @@ const headlines = [
 
 function RotatingHeadline() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
-    if (shouldReduceMotion) return
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % headlines.length)
-    }, 4000) // Change every 4 seconds
+    }, 3000)
 
     return () => clearInterval(interval)
-  }, [shouldReduceMotion])
+  }, [])
 
   const currentHeadline = headlines[currentIndex]
 
   return (
-    <span className="inline-block">
+    <span className="block text-4xl font-bold leading-tight tracking-tight text-fg md:text-6xl lg:text-7xl">
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className="inline-block"
+          transition={{
+            duration: 0.5,
+            ease: 'easeInOut',
+          }}
+          className="block"
         >
           {currentHeadline.text}{' '}
           <span className="text-gradient">{currentHeadline.highlight}</span>
@@ -82,110 +82,95 @@ export function Hero() {
     >
       {/* Video Background */}
       <VideoBackground
-        src="/video/hero-loop.mp4"
+        src="/video/hero-bg.mp4"
         poster="/img/hero-poster.jpg"
-        overlayOpacity={0.7}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
       />
-      
-      {/* Enhanced Background Effects */}
-      <FloatingParticles />
-      <div className="absolute top-1/4 left-1/4 opacity-70">
-        <MorphingBlob color="cy" size="lg" />
-      </div>
-      <div className="absolute bottom-1/4 right-1/4 opacity-60">
-        <MorphingBlob color="vi" size="md" />
-      </div>
-      <div className="grid-background" />
 
-      {/* Content */}
-      <Container className="relative z-10 py-8 sm:py-12 md:py-16">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
-          {/* Left: Text Content */}
+      {/* Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-bg/20 via-bg/40 to-bg/60 backdrop-blur-[1px]" />
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 z-20">
+        <FloatingParticles count={shouldReduceMotion ? 0 : 15} />
+        <MorphingBlob color="cy" size="xl" />
+        <MorphingBlob color="vi" size="lg" />
+        <MorphingBlob color="am" size="md" />
+      </div>
+
+      <Container className="relative z-30 grid h-full items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        {/* Left Column - Text Content */}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={staggerChildren}
+          className="text-center lg:text-left"
+        >
+          {/* Headline with rotating text */}
           <motion.div
-            variants={staggerChildren}
-            initial="initial"
-            animate="animate"
-            className="text-center lg:text-left"
+            variants={fadeInUp}
+            transition={{ duration: 0.8 }}
+            className="mb-6"
           >
-            {/* Headline */}
-            <motion.h1
-              variants={fadeInUp}
-              transition={{ duration: 0.8 }}
-              className="mb-4 text-3xl font-bold leading-tight tracking-tight text-fg sm:text-4xl md:text-5xl lg:text-6xl px-4 sm:px-0"
-            >
-              <RotatingHeadline />
-            </motion.h1>
-
-            {/* Subhead */}
-            <motion.p
-              variants={fadeInUp}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-6 text-lg font-medium text-fg/90 sm:text-xl md:text-2xl px-4 sm:px-0 max-w-3xl"
-            >
-              Bridging your real-world experiences into an AI twin that remembers with you, recommends better, and plans with the people you trust.
-            </motion.p>
-
-            {/* Bullets */}
-            <motion.ul
-              variants={fadeInUp}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-8 space-y-2.5 text-left px-4 sm:px-0"
-            >
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
-                <span className="mt-1 text-cy">✓</span>
-                <span>Never lose track of spots you loved.</span>
-              </li>
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
-                <span className="mt-1 text-cy">✓</span>
-                <span>Get recommendations based on your real life, not ads.</span>
-              </li>
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
-                <span className="mt-1 text-cy">✓</span>
-                <span>Plan hangouts and trips around shared tastes.</span>
-              </li>
-            </motion.ul>
-
-            {/* CTA Buttons */}
-            <motion.div
-              variants={fadeInUp}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col items-center lg:items-start gap-4 sm:flex-row px-4 sm:px-0"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="w-full sm:w-auto"
-              >
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={() => scrollToSection('cta')}
-                  className="w-full sm:min-w-[200px] shadow-2xl shadow-cy/50"
-                >
-                  Join the waitlist
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="w-full sm:w-auto"
-              >
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  onClick={() => scrollToSection('how-it-works')}
-                  className="w-full sm:min-w-[200px]"
-                >
-                  See how it works
-                </Button>
-              </motion.div>
-            </motion.div>
+            <RotatingHeadline />
           </motion.div>
 
-          {/* Right: Product Mock */}
+          {/* Subheading */}
+          <motion.p
+            variants={fadeInUp}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-8 text-base sm:text-lg text-fg/80 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+          >
+            Bridging your real-world experiences into an AI twin
+            that remembers with you, recommends better, and
+            plans with the people you trust.
+          </motion.p>
+
+          {/* Bullet Points */}
+          <motion.ul
+            variants={fadeInUp}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mb-8 space-y-2.5 text-left px-4 sm:px-0"
+          >
+            <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
+              <span className="mt-1 text-cy">✓</span>
+              <span>Transform your everyday places into lasting memories</span>
+            </li>
+            <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
+              <span className="mt-1 text-cy">✓</span>
+              <span>Discover new favorites based on your actual experiences</span>
+            </li>
+            <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
+              <span className="mt-1 text-cy">✓</span>
+              <span>Connect meaningfully through shared experiences & moments</span>
+            </li>
+          </motion.ul>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-cy via-vi to-am text-bg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              Join the waitlist
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => scrollToSection('how-it-works')}
+              className="border-cy/50 text-cy hover:bg-cy/10 transition-colors duration-300"
+            >
+              See how it works
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Right Column - Preview */}
+        <div className="flex justify-center lg:justify-end">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -193,13 +178,34 @@ export function Hero() {
             className="relative flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-sm rounded-2xl border border-fg/20 bg-bg/50 p-6 backdrop-blur-sm shadow-2xl">
-              {/* Concept UI Label */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-fg/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-fg/50 font-medium">
-                Concept UI
+              {/* Preview Badge */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-vi/20 to-am/20 border border-vi/30 px-3 py-1 text-[11px] uppercase tracking-wider text-vi font-semibold backdrop-blur-sm">
+                🧠 Your AI Twin
               </div>
               
-              {/* Map/Location List */}
-              <div className="mb-4 space-y-2">
+              {/* Stats Header */}
+              <div className="mb-4 grid grid-cols-3 gap-2 rounded-lg bg-gradient-to-r from-cy/5 to-vi/5 p-3 border border-cy/20">
+                <div className="text-center">
+                  <div className="text-lg font-bold text-cy">47</div>
+                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Places</div>
+                </div>
+                <div className="text-center border-x border-fg/10">
+                  <div className="text-lg font-bold text-vi">128</div>
+                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Memories</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-am">23</div>
+                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Insights</div>
+                </div>
+              </div>
+
+              {/* Recent Places */}
+              <div className="mb-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <h4 className="text-sm font-semibold text-fg">Recent Places</h4>
+                  <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse"></div>
+                </div>
+                <div className="space-y-2">
                 <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center text-lg">
                     📍
@@ -227,29 +233,51 @@ export function Hero() {
                     <div className="text-xs text-fg/60">3 days ago • Focused</div>
                   </div>
                 </div>
-              </div>
-
-              {/* Mood Tag Chips */}
-              <div className="mb-4 flex flex-wrap gap-2">
-                {['Relaxed', 'Waterfront', 'Quiet', 'Weekend'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-cy/20 px-3 py-1 text-xs text-cy"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* AI Chat Bubble */}
-              <div className="rounded-xl bg-gradient-to-br from-cy/20 to-vi/10 p-4 border border-cy/30">
-                <div className="mb-2 flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-cy to-vi" />
-                  <span className="text-xs font-medium text-fg/70">Your AI Twin</span>
                 </div>
-                <p className="text-sm text-fg/80 leading-relaxed">
-                  Most of your happiest moments are near the water. Here are 3 new places you&apos;d love this month.
+              </div>
+
+              {/* Pattern Detection */}
+              <div className="mb-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-fg">Patterns</h4>
+                  <div className="flex gap-1">
+                    <div className="h-1 w-1 rounded-full bg-cy animate-pulse"></div>
+                    <div className="h-1 w-1 rounded-full bg-vi animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="h-1 w-1 rounded-full bg-am animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {['Waterfront', 'Weekend', 'Quiet', 'Relaxed'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-cy/20 px-2.5 py-1 text-[10px] text-cy font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* AI Insight */}
+              <div className="rounded-xl bg-gradient-to-br from-vi/20 to-am/10 p-3 border border-vi/30">
+                <div className="mb-2 flex items-center gap-2">
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center">
+                    <div className="h-2 w-2 rounded-full bg-bg animate-pulse"></div>
+                  </div>
+                  <span className="text-xs font-medium text-fg/70">AI Insight</span>
+                  <div className="ml-auto text-xs text-fg/50">Live</div>
+                </div>
+                <p className="text-xs text-fg/80 leading-relaxed mb-2">
+                  "Your waterfront visits spike on weekends when stressed. I found 3 similar spots with better accessibility."
                 </p>
+                <div className="flex items-center gap-2 text-[10px] text-fg/60">
+                  <span className="flex items-center gap-1">
+                    <div className="h-1 w-1 rounded-full bg-green-500"></div>
+                    87% confidence
+                  </span>
+                  <span>•</span>
+                  <span>Based on 12 visits</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -279,4 +307,3 @@ export function Hero() {
     </section>
   )
 }
-
