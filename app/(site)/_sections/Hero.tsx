@@ -1,12 +1,52 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Button } from '../_components/Button'
 import { VideoBackground } from '../_components/VideoBackground'
 import { FloatingParticles } from '../_components/FloatingParticles'
 import { MorphingBlob } from '../_components/MorphingBlob'
 import { ChevronDown } from '../_components/Icon'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { Container } from '../_components/Container'
+
+const rotatingTexts = [
+  'digital twin',
+  'living memory',
+  'intelligent companion',
+  'experience graph',
+]
+
+function RotatingText() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const shouldReduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (shouldReduceMotion) return
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % rotatingTexts.length)
+    }, 3000) // Change every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [shouldReduceMotion])
+
+  return (
+    <span className="text-gradient glow-cy inline-block min-w-[200px] sm:min-w-[280px] md:min-w-[320px] text-center">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={currentIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          className="inline-block"
+        >
+          {rotatingTexts[currentIndex]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion()
@@ -70,9 +110,7 @@ export function Hero() {
             className="mb-6 text-3xl font-bold leading-tight tracking-tight text-fg sm:text-4xl md:text-5xl lg:text-7xl px-4 sm:px-0"
           >
             Transform your real-world experiences into a{' '}
-            <span className="text-gradient glow-cy">
-              personal memory graph
-            </span>
+            <RotatingText />
           </motion.h1>
 
           {/* Subtitle */}
