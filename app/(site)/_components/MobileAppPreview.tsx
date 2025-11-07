@@ -102,35 +102,89 @@ export function CheckInScreen() {
       </div>
 
       {/* Map View */}
-      <div className="relative flex-1 overflow-hidden bg-gradient-to-br from-cyan-900/20 via-blue-900/20 to-purple-900/20">
-        {/* Map-like background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <svg className="h-full w-full" viewBox="0 0 400 600">
-            {/* Grid lines */}
-            {Array.from({ length: 8 }).map((_, i) => (
-              <line
-                key={`h-${i}`}
-                x1="0"
-                y1={i * 75}
-                x2="400"
-                y2={i * 75}
-                stroke="currentColor"
-                strokeWidth="0.5"
-                className="text-fg/10"
-              />
-            ))}
-            {Array.from({ length: 6 }).map((_, i) => (
-              <line
-                key={`v-${i}`}
-                x1={i * 80}
-                y1="0"
-                x2={i * 80}
-                y2="600"
-                stroke="currentColor"
-                strokeWidth="0.5"
-                className="text-fg/10"
-              />
-            ))}
+      <div className="relative flex-1 overflow-hidden bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
+        {/* Realistic Map Background */}
+        <div className="absolute inset-0">
+          <svg className="h-full w-full" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+            {/* Map Background */}
+            <defs>
+              <pattern id="mapTexture-checkin" patternUnits="userSpaceOnUse" width="40" height="40">
+                <rect width="40" height="40" fill="#1e293b" />
+                <rect x="0" y="0" width="20" height="20" fill="#334155" opacity="0.3" />
+                <rect x="20" y="20" width="20" height="20" fill="#334155" opacity="0.3" />
+              </pattern>
+              <linearGradient id="waterGradient-checkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0891b2" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#0e7490" stopOpacity="0.5" />
+              </linearGradient>
+              <linearGradient id="parkGradient-checkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#15803d" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#166534" stopOpacity="0.4" />
+              </linearGradient>
+            </defs>
+            
+            {/* Base map texture */}
+            <rect width="400" height="600" fill="url(#mapTexture-checkin)" />
+            
+            {/* Water bodies (ocean/bay area) */}
+            <path
+              d="M0,400 Q100,380 200,390 T400,420 L400,600 L0,600 Z"
+              fill="url(#waterGradient-checkin)"
+            />
+            <ellipse cx="80" cy="150" rx="45" ry="25" fill="url(#waterGradient-checkin)" />
+            
+            {/* Park areas */}
+            <ellipse cx="280" cy="180" rx="60" ry="40" fill="url(#parkGradient-checkin)" />
+            <circle cx="120" cy="320" r="35" fill="url(#parkGradient-checkin)" />
+            
+            {/* Streets and roads */}
+            <g stroke="#64748b" fill="none" strokeWidth="2" opacity="0.6">
+              {/* Main horizontal streets */}
+              <line x1="0" y1="120" x2="400" y2="125" />
+              <line x1="0" y1="220" x2="400" y2="215" />
+              <line x1="0" y1="320" x2="400" y2="325" />
+              
+              {/* Main vertical streets */}
+              <line x1="100" y1="0" x2="95" y2="400" />
+              <line x1="200" y1="0" x2="205" y2="400" />
+              <line x1="300" y1="0" x2="295" y2="400" />
+              
+              {/* Diagonal streets */}
+              <path d="M50,0 Q150,100 250,200 T350,400" />
+              <path d="M350,0 Q250,100 150,200 T50,400" />
+            </g>
+            
+            {/* Smaller connecting streets */}
+            <g stroke="#64748b" fill="none" strokeWidth="1" opacity="0.3">
+              <line x1="0" y1="80" x2="400" y2="85" />
+              <line x1="0" y1="160" x2="400" y2="155" />
+              <line x1="0" y1="280" x2="400" y2="275" />
+              <line x1="50" y1="0" x2="55" y2="400" />
+              <line x1="150" y1="0" x2="145" y2="400" />
+              <line x1="250" y1="0" x2="255" y2="400" />
+              <line x1="350" y1="0" x2="345" y2="400" />
+            </g>
+            
+            {/* Building blocks */}
+            <g fill="#374151" opacity="0.4">
+              <rect x="110" y="130" width="30" height="40" rx="2" />
+              <rect x="160" y="110" width="25" height="35" rx="2" />
+              <rect x="210" y="140" width="40" height="30" rx="2" />
+              <rect x="270" y="120" width="35" height="45" rx="2" />
+              <rect x="60" y="240" width="45" height="25" rx="2" />
+              <rect x="140" y="260" width="30" height="40" rx="2" />
+              <rect x="220" y="280" width="35" height="30" rx="2" />
+              <rect x="300" y="250" width="40" height="50" rx="2" />
+            </g>
+            
+            {/* Coastline detail */}
+            <path
+              d="M0,400 Q50,395 100,400 T200,395 Q250,390 300,395 T400,410"
+              stroke="#0891b2"
+              strokeWidth="1"
+              fill="none"
+              opacity="0.6"
+            />
           </svg>
         </div>
 
@@ -151,15 +205,19 @@ export function CheckInScreen() {
             >
               <div className="h-12 w-12 rounded-full bg-cy shadow-lg shadow-cy/50 ring-4 ring-cy/20" />
               <div className="absolute left-1/2 top-full h-6 w-1 -translate-x-1/2 bg-cy" />
+              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-cy/95 px-3 py-2 text-[11px] font-semibold text-bg backdrop-blur-sm border border-cy/30 shadow-lg">
+                You are here
+                <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-cy border-l border-t border-cy/30"></div>
+              </div>
             </motion.div>
           </div>
 
           {/* Other Location Pins */}
           {[
-            { x: '20%', y: '25%', label: 'Café Luna' },
-            { x: '75%', y: '40%', label: 'Beach Park' },
-            { x: '30%', y: '60%', label: 'Art Gallery' },
-            { x: '80%', y: '70%', label: 'Restaurant' },
+            { x: '20%', y: '15%', label: 'Café Luna' },
+            { x: '75%', y: '45%', label: 'Beach Park' },
+            { x: '25%', y: '70%', label: 'Art Gallery' },
+            { x: '80%', y: '80%', label: 'Restaurant' },
           ].map((pin, i) => (
             <div
               key={i}
@@ -168,8 +226,9 @@ export function CheckInScreen() {
             >
               <div className="relative">
                 <div className="h-8 w-8 rounded-full bg-vi/60 shadow-md ring-2 ring-vi/30" />
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900/90 px-2 py-1 text-[10px] text-fg/80 backdrop-blur-sm">
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-gray-900/95 px-3 py-2 text-[11px] font-medium text-white backdrop-blur-sm border border-gray-700/50 shadow-lg">
                   {pin.label}
+                  <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-gray-900 border-l border-t border-gray-700/50"></div>
                 </div>
               </div>
             </div>
@@ -178,8 +237,25 @@ export function CheckInScreen() {
 
         {/* Map Controls */}
         <div className="absolute right-4 top-4 flex flex-col gap-2">
-          <div className="h-10 w-10 rounded-lg bg-bg/80 backdrop-blur-sm shadow-lg" />
-          <div className="h-10 w-10 rounded-lg bg-bg/80 backdrop-blur-sm shadow-lg" />
+          <motion.button 
+            className="h-10 w-10 rounded-lg bg-bg/80 backdrop-blur-sm shadow-lg flex items-center justify-center text-fg/70 hover:text-fg transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            +
+          </motion.button>
+          <motion.button 
+            className="h-10 w-10 rounded-lg bg-bg/80 backdrop-blur-sm shadow-lg flex items-center justify-center text-fg/70 hover:text-fg transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            −
+          </motion.button>
+        </div>
+
+        {/* Map Attribution */}
+        <div className="absolute bottom-4 left-4 text-xs text-fg/40">
+          MeshWorld Maps
         </div>
       </div>
 
@@ -190,10 +266,12 @@ export function CheckInScreen() {
           animate={checkedIn ? { scale: [1, 1.02, 1] } : {}}
           transition={{ duration: 0.3 }}
         >
-          <div className="h-10 w-10 rounded-full bg-cy/30" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-lg">
+            ☕
+          </div>
           <div className="flex-1">
-            <div className="mb-1 h-3 w-32 rounded bg-fg/20" />
-            <div className="h-2 w-24 rounded bg-fg/10" />
+            <div className="mb-1 text-sm font-semibold text-fg">Café Luna</div>
+            <div className="text-xs text-fg/60">Coffee Shop • 0.2 mi away</div>
           </div>
           <motion.button
             onClick={() => setCheckedIn(!checkedIn)}
@@ -507,7 +585,9 @@ export function LocationCaptureScreen() {
           transition={{ duration: 0.3 }}
         >
           <div className="mb-3 flex items-start gap-3">
-            <div className="h-12 w-12 rounded-full bg-cy/40" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-xl">
+              ☕
+            </div>
             <div className="flex-1">
               <h4 className="mb-1 font-semibold text-fg">Café Luna</h4>
               <p className="text-xs text-fg/60">Coffee Shop • 0.2 mi away</p>
