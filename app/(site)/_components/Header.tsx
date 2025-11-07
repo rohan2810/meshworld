@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from './Button'
 import { Container } from './Container'
@@ -68,10 +69,18 @@ export function Header() {
               setIsMobileMenuOpen(false)
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="text-xl md:text-2xl font-bold tracking-tight text-fg transition-colors hover:text-cy focus-visible:text-cy"
+            className="flex items-center gap-2 text-xl md:text-2xl font-bold tracking-tight text-fg transition-colors hover:text-cy focus-visible:text-cy"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
+            <Image 
+              src="/img/logo.png" 
+              alt="SetuAI Logo" 
+              width={40}
+              height={40}
+              className="h-8 w-8 md:h-10 md:w-10"
+              priority
+            />
             <span className="text-gradient">
               SetuAI
             </span>

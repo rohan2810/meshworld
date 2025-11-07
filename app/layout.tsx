@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: 'SetuAI - Bridging Human, Data, and Experiences',
   description: 'SetuAI - Bridging Human, Data, and Experiences',
   metadataBase: new URL('https://setuai.app'),
+  icons: {
+    icon: '/img/logo.png',
+    apple: '/img/logo.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

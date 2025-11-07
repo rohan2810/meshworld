@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Container } from './Container'
 
 export function Footer() {
@@ -20,7 +21,16 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           {/* Logo / Name */}
           <div className="text-center md:text-left">
-            <div className="mb-2 text-lg font-semibold text-fg">SetuAI</div>
+            <div className="mb-4 flex items-center justify-center gap-2 md:justify-start">
+              <Image 
+                src="/img/logo.png" 
+                alt="SetuAI Logo" 
+                width={32}
+                height={32}
+                className="h-8 w-8"
+              />
+              <div className="text-lg font-semibold text-fg">SetuAI</div>
+            </div>
             <div className="text-sm text-fg/50">
               © {currentYear} SetuAI. All rights reserved.
             </div>
