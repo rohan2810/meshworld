@@ -270,6 +270,7 @@ const steps = [
     title: 'Capture',
     subtitle: '',
     description: 'Two ways to capture: Location-based (Google Maps Timeline or "I\'m here" check-ins) or Event-based (calendar-triggered reflection prompts after events).',
+    payoff: 'Your experiences become nodes in a private memory graph.',
     color: 'cy',
     visual: 'mobile-dual',
     mobileScreens: [<LocationCaptureScreen key="location" />, <EventCaptureScreen key="event" />],
@@ -281,6 +282,7 @@ const steps = [
     title: 'Learn',
     subtitle: '',
     description: 'SetuAI learns what you enjoy — quiet cafés, sunset walks, art events, solo vs social time — without you doing manual tracking.',
+    payoff: 'SetuAI builds a private model of what you enjoy from your logs.',
     color: 'vi',
     visual: 'graph',
     showLearning: true,
@@ -291,6 +293,7 @@ const steps = [
     title: 'Reflect',
     subtitle: '',
     description: 'Ask your AI twin questions like "Where do I feel most relaxed?" or "What weekends made me happiest?" and get answers grounded in your real life.',
+    payoff: 'Ask natural questions about your life and get evidence-backed answers.',
     color: 'am',
     visual: 'mobile',
     mobileScreen: <ChatScreen />,
@@ -301,6 +304,7 @@ const steps = [
     title: 'Connect',
     subtitle: '',
     description: 'Link with a friend (opt-in only). Our system finds overlaps in your preferences and suggests plans you\'ll both actually like.',
+    payoff: 'Blend twins with people you trust for co-plans that fit everyone.',
     color: 'cy',
     visual: 'graph',
     showConnection: true,
@@ -386,6 +390,42 @@ export function HowItWorks() {
             Four simple steps to transform your experiences into a private memory graph
           </p>
         </motion.div>
+
+        {/* Static Step Overview - All 4 Steps Visible */}
+        <div className="mb-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className={cn(
+                "rounded-xl border p-4 transition-all cursor-pointer",
+                activeStep === index 
+                  ? "border-cy/50 bg-cy/5 shadow-lg shadow-cy/10" 
+                  : "border-fg/20 bg-bg/30 hover:border-fg/30"
+              )}
+              onClick={() => {
+                setActiveStep(index)
+                setIsPaused(true)
+              }}
+            >
+              <div className={cn(
+                "mb-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold",
+                step.color === 'cy' && 'bg-cy/20 text-cy',
+                step.color === 'vi' && 'bg-vi/20 text-vi',
+                step.color === 'am' && 'bg-am/20 text-am',
+              )}>
+                Step {step.step}
+              </div>
+              <h3 className="text-lg font-bold text-fg mb-1">{step.title}</h3>
+              {step.payoff && (
+                <p className="text-xs text-fg/60 leading-snug">{step.payoff}</p>
+              )}
+            </motion.div>
+          ))}
+        </div>
 
         {/* Progress Bar */}
         <div className="mb-8 relative">
@@ -493,10 +533,20 @@ export function HowItWorks() {
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
-                  className="text-lg text-fg/70 leading-relaxed"
+                  className="text-lg text-fg/70 leading-relaxed mb-3"
                 >
                   {steps[activeStep].description}
                 </motion.p>
+                {steps[activeStep].payoff && (
+                  <motion.p
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    className="text-base font-medium text-cy/90"
+                  >
+                    {steps[activeStep].payoff}
+                  </motion.p>
+                )}
               </div>
             </motion.div>
 

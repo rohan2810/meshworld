@@ -90,10 +90,9 @@ export function Header() {
           <div className="hidden items-center gap-6 lg:gap-8 md:flex">
             {[
               { href: 'how-it-works', label: 'How It Works' },
-              { href: 'features', label: 'Features' },
               { href: 'use-cases', label: 'Use Cases' },
+              { href: 'features', label: 'Features' },
               { href: 'tech', label: 'Technology' },
-              { href: 'cta', label: 'Join' },
             ].map((link, index) => (
               <motion.a
                 key={link.href}
@@ -177,8 +176,8 @@ export function Header() {
           <div className="border-t border-fg/10 py-4 space-y-2">
             {[
               { href: 'how-it-works', label: 'How It Works' },
-              { href: 'features', label: 'Features' },
               { href: 'use-cases', label: 'Use Cases' },
+              { href: 'features', label: 'Features' },
               { href: 'tech', label: 'Technology' },
               { href: 'cta', label: 'Join Waitlist' },
             ].map((link) => (

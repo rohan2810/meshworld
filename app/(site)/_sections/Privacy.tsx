@@ -54,11 +54,15 @@ export function Privacy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-3 text-lg text-fg/80"
+          className="rounded-2xl border border-fg/20 bg-bg/50 p-8 backdrop-blur-sm space-y-3 text-lg text-fg/80"
         >
           <div className="flex items-start gap-3">
             <span className="mt-1 text-cy">✓</span>
             <span>You own your data. Export or delete anytime.</span>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="mt-1 text-cy">✓</span>
+            <span>We will never sell your location data.</span>
           </div>
           <div className="flex items-start gap-3">
             <span className="mt-1 text-cy">✓</span>

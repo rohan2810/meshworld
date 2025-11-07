@@ -75,49 +75,29 @@ const tripExample = {
 const personaUseCases = [
   {
     title: 'The Explorer',
-    description: 'Travels often and hates forgetting favorite spots or context.',
+    description: 'Travels often or just moved cities. Never forgets favorite spots or context.',
+    sampleQuery: 'Show me all the spots where I felt most relaxed this month.',
     emoji: '🗺️',
     color: 'from-cy to-blue-500',
   },
   {
-    title: 'The Solo Archivist',
-    description: 'Keeps a living journal of feelings, meals, and breakthroughs.',
-    emoji: '📔',
-    color: 'from-vi to-purple-500',
-  },
-  {
-    title: 'The Host',
-    description: 'Plans dinners, hangs, and wants the right vibe for every guest list.',
+    title: 'The Planner',
+    description: 'Hosts dinners, plans trips, and connects friends. Wants the right vibe for every group.',
+    sampleQuery: 'I am planning to get coffee with Sarah, suggest a place we both love.',
     emoji: '🍷',
     color: 'from-am to-orange-500',
   },
   {
-    title: 'The Trip Captain',
-    description: 'Aligns group itineraries faster with shared preferences in one view.',
-    emoji: '🚐',
-    color: 'from-pink to-rose-500',
-  },
-  {
-    title: 'The Connector',
-    description: 'Introduces friends, curates invites, and wants context before suggesting plans.',
-    emoji: '🤝',
-    color: 'from-cy to-vi',
-  },
-  {
-    title: 'The New Local',
-    description: 'Just moved cities and builds a trusted guide from day one.',
-    emoji: '🏙️',
-    color: 'from-vi to-am',
-  },
-  {
-    title: 'The Team Lead',
-    description: 'Designs offsites and wellness days using what energizes the group.',
-    emoji: '💼',
-    color: 'from-am to-pink',
+    title: 'The Archivist',
+    description: 'Keeps a living journal of feelings, meals, and breakthroughs. Solo reflection and journaling.',
+    sampleQuery: 'What patterns do you see in my weekend routines?',
+    emoji: '📔',
+    color: 'from-vi to-purple-500',
   },
   {
     title: 'The Builder',
     description: 'Partners and devs experimenting with experience graphs.',
+    sampleQuery: 'Building with friends, creatives, and planners who want real context.',
     emoji: '🔧',
     color: 'from-cy to-am',
   },
@@ -507,22 +487,26 @@ export function UseCases() {
                 <h3 className="mb-2 text-xl font-bold text-fg transition-colors group-hover:text-cy">
                   {useCase.title}
                 </h3>
-                <p className="text-base leading-relaxed text-fg/70 group-hover:text-fg/80">
+                <p className="mb-4 text-sm leading-relaxed text-fg/70 group-hover:text-fg/80">
                   {useCase.description}
                 </p>
+                <div className="rounded-lg bg-fg/5 p-3 border border-fg/10">
+                  <p className="text-xs text-fg/60 mb-1">Sample query:</p>
+                  <p className="text-xs text-fg/80 italic">&ldquo;{useCase.sampleQuery}&rdquo;</p>
+                </div>
               </div>
               
             </motion.div>
           ))}
         </div>
 
-        {/* Contact */}
+        {/* Contact CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto max-w-2xl text-center"
+          className="mx-auto max-w-2xl text-center rounded-2xl border border-fg/20 bg-bg/50 p-8 backdrop-blur-sm"
         >
           <p className="mb-3 text-lg text-fg/80">
             Building with friends, creatives, and planners who want real context.

@@ -121,26 +121,26 @@ export function Hero() {
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-6 text-lg text-fg/80 sm:text-xl md:text-2xl px-4 sm:px-0"
+              className="mb-6 text-lg font-medium text-fg/90 sm:text-xl md:text-2xl px-4 sm:px-0 max-w-3xl"
             >
-              SetuAI - Bridging Human, Data, and Experiences
+              Bridging your real-world experiences into an AI twin that remembers with you, recommends better, and plans with the people you trust.
             </motion.p>
 
             {/* Bullets */}
             <motion.ul
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-8 space-y-2 text-left px-4 sm:px-0"
+              className="mb-8 space-y-2.5 text-left px-4 sm:px-0"
             >
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80">
+              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
                 <span className="mt-1 text-cy">✓</span>
                 <span>Never lose track of spots you loved.</span>
               </li>
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80">
+              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
                 <span className="mt-1 text-cy">✓</span>
                 <span>Get recommendations based on your real life, not ads.</span>
               </li>
-              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80">
+              <li className="flex items-start gap-3 text-base sm:text-lg text-fg/80 leading-snug">
                 <span className="mt-1 text-cy">✓</span>
                 <span>Plan hangouts and trips around shared tastes.</span>
               </li>
@@ -194,7 +194,7 @@ export function Hero() {
           >
             <div className="relative w-full max-w-sm rounded-2xl border border-fg/20 bg-bg/50 p-6 backdrop-blur-sm shadow-2xl">
               {/* Concept UI Label */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-fg/10 px-3 py-1 text-xs text-fg/60">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-fg/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-fg/50 font-medium">
                 Concept UI
               </div>
               

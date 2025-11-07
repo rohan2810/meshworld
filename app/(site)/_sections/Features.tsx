@@ -93,8 +93,11 @@ export function Features() {
               Features
             </span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-fg/70">
+          <p className="mx-auto max-w-2xl text-lg text-fg/70 mb-2">
             Outcome-based features that help you remember, understand, discover, and connect.
+          </p>
+          <p className="mx-auto max-w-2xl text-sm text-fg/50">
+            What SetuAI will ship in v1, and what&apos;s on deck next.
           </p>
         </motion.div>
 
@@ -116,9 +119,9 @@ export function Features() {
                   index={index}
                 />
                 <div className={cn(
-                  "absolute top-4 right-4 rounded-full px-2.5 py-1 text-xs font-medium min-w-[90px] text-center",
+                  "absolute top-4 right-4 rounded-full px-2.5 py-1 text-xs font-semibold min-w-[90px] text-center",
                   feature.badge === 'MVP'
-                    ? "bg-cy/20 text-cy"
+                    ? "bg-cy text-bg"
                     : "border border-fg/30 bg-transparent text-fg/60"
                 )}>
                   {feature.badge}

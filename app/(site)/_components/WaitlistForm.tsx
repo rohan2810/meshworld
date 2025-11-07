@@ -57,7 +57,7 @@ export function WaitlistForm() {
           <div className="mb-2 text-2xl">✓</div>
           <h3 className="mb-2 text-lg font-semibold text-cy">You&apos;re on the list!</h3>
           <p className="text-sm text-fg/70">
-            We&apos;ll send you an email when we launch. Check your inbox for confirmation.
+            We&apos;ll reach out with early access.
           </p>
         </motion.div>
       ) : (
@@ -84,7 +84,7 @@ export function WaitlistForm() {
             />
             
             <label htmlFor="use-case" className="sr-only">
-              How would you mainly use MeshWorld?
+              How would you mainly use SetuAI?
             </label>
             <select
               id="use-case"
@@ -98,7 +98,7 @@ export function WaitlistForm() {
                 !useCase && 'text-fg/40'
               )}
             >
-              <option value="">How would you mainly use MeshWorld? (optional)</option>
+              <option value="">How would you mainly use SetuAI? (optional)</option>
               {useCaseOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
