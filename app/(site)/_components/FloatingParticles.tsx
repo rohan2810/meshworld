@@ -13,12 +13,16 @@ interface Particle {
   color: string
 }
 
-export function FloatingParticles() {
+interface FloatingParticlesProps {
+  count?: number
+}
+
+export function FloatingParticles({ count = 20 }: FloatingParticlesProps) {
   const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
     const colors = ['#00F5FF', '#B794F6', '#FFD700', '#FF6B9D']
-    const newParticles: Particle[] = Array.from({ length: 20 }, (_, i) => ({
+    const newParticles: Particle[] = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -28,7 +32,7 @@ export function FloatingParticles() {
       color: colors[Math.floor(Math.random() * colors.length)],
     }))
     setParticles(newParticles)
-  }, [])
+  }, [count])
 
   return (
     <div className="particles">

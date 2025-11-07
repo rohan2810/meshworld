@@ -93,9 +93,9 @@ export function Hero() {
       {/* Floating Elements */}
       <div className="absolute inset-0 z-20">
         <FloatingParticles count={shouldReduceMotion ? 0 : 15} />
-        <MorphingBlob color="cy" size="xl" />
-        <MorphingBlob color="vi" size="lg" />
-        <MorphingBlob color="am" size="md" />
+        <MorphingBlob color="cy" size="lg" />
+        <MorphingBlob color="vi" size="md" />
+        <MorphingBlob color="am" size="sm" />
       </div>
 
       <Container className="relative z-30 grid h-full items-center gap-8 lg:grid-cols-2 lg:gap-12">
@@ -159,10 +159,10 @@ export function Hero() {
               Join the waitlist
             </Button>
             <Button
-              variant="outline"
+              variant="secondary"
               size="lg"
               onClick={() => scrollToSection('how-it-works')}
-              className="border-cy/50 text-cy hover:bg-cy/10 transition-colors duration-300"
+              className="transition-colors duration-300"
             >
               See how it works
             </Button>
@@ -268,7 +268,7 @@ export function Hero() {
                   <div className="ml-auto text-xs text-fg/50">Live</div>
                 </div>
                 <p className="text-xs text-fg/80 leading-relaxed mb-2">
-                  "Your waterfront visits spike on weekends when stressed. I found 3 similar spots with better accessibility."
+                  &ldquo;Your waterfront visits spike on weekends when stressed. I found 3 similar spots with better accessibility.&rdquo;
                 </p>
                 <div className="flex items-center gap-2 text-[10px] text-fg/60">
                   <span className="flex items-center gap-1">
