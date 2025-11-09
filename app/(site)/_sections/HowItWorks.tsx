@@ -589,12 +589,28 @@ export function HowItWorks() {
                   <ControlledTwinDemo stage={subStep} />
                 </div>
               ) : (
-                <div className="relative h-[500px] w-full max-w-2xl rounded-2xl bg-gradient-to-br from-vi/10 to-am/10 p-8 glass">
-                  <DigitalTwinVisualization
-                    showLearning={steps[activeStep].showLearning}
-                    showConnection={false}
-                    twinCount={1}
-                  />
+                <div className="relative mx-auto w-[280px] md:w-[320px]">
+                  <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
+                    <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
+                    <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+                      <div className="h-[600px] w-full p-4 flex items-center justify-center">
+                        <div className="w-full h-full">
+                          <DigitalTwinVisualization
+                            showLearning={steps[activeStep].showLearning}
+                            showConnection={false}
+                            twinCount={1}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mx-auto mt-2 h-1 w-32 rounded-full bg-white/30" />
+                  </div>
+                  <div className="mt-6 text-center">
+                    <h3 className="mb-2 text-xl font-semibold text-fg">
+                      {steps[activeStep].title}
+                    </h3>
+                    <p className="text-sm text-fg/70">AI learning your patterns</p>
+                  </div>
                 </div>
               )}
             </motion.div>

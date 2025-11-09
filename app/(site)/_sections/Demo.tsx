@@ -311,51 +311,70 @@ export function Demo() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="mb-8 flex flex-wrap justify-center gap-3"
-      >
-        <button
-          onClick={() => setActiveView('timeline')}
-          className={cn(
-            "rounded-lg px-6 py-3 text-sm font-semibold transition-all",
-            activeView === 'timeline'
-              ? "bg-gradient-to-r from-cy to-vi text-bg shadow-lg"
-              : "bg-fg/10 text-fg/70 hover:bg-fg/20"
-          )}
-        >
-          📍 Your Timeline
-        </button>
-        <button
-          onClick={() => setActiveView('chat')}
-          className={cn(
-            "rounded-lg px-6 py-3 text-sm font-semibold transition-all",
-            activeView === 'chat'
-              ? "bg-gradient-to-r from-cy to-vi text-bg shadow-lg"
-              : "bg-fg/10 text-fg/70 hover:bg-fg/20"
-          )}
-        >
-          💬 Ask Your Twin
-        </button>
-        <button
-          onClick={() => setActiveView('plan')}
-          className={cn(
-            "rounded-lg px-6 py-3 text-sm font-semibold transition-all",
-            activeView === 'plan'
-              ? "bg-gradient-to-r from-cy to-vi text-bg shadow-lg"
-              : "bg-fg/10 text-fg/70 hover:bg-fg/20"
-          )}
-        >
-          🤝 Plan Together
-        </button>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mx-auto max-w-4xl rounded-2xl border border-fg/10 bg-bg/80 p-6 backdrop-blur-sm sm:p-8"
+        className="mx-auto max-w-md"
       >
+        {/* Phone Mockup */}
+        <div className="relative mx-auto w-full max-w-[380px]">
+          {/* Phone Frame */}
+          <div className="relative rounded-[3rem] border-[14px] border-fg/90 bg-fg/90 shadow-2xl">
+            {/* Notch */}
+            <div className="absolute top-0 left-1/2 z-10 h-6 w-40 -translate-x-1/2 rounded-b-3xl bg-fg/90"></div>
+            
+            {/* Screen */}
+            <div className="relative overflow-hidden rounded-[2.3rem] bg-bg">
+              {/* Status Bar */}
+              <div className="flex items-center justify-between bg-bg px-6 pb-2 pt-8 text-xs text-fg/60">
+                <span>9:41</span>
+                <div className="flex items-center gap-1">
+                  <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                  </svg>
+                  <svg className="h-3 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* View Toggle - Inside Phone */}
+              <div className="bg-bg px-4 pb-3 flex gap-2">
+                <button
+                  onClick={() => setActiveView('timeline')}
+                  className={cn(
+                    "flex-1 rounded-lg px-3 py-2 text-[11px] font-semibold transition-all",
+                    activeView === 'timeline'
+                      ? "bg-gradient-to-r from-cy to-vi text-bg shadow-md"
+                      : "bg-fg/10 text-fg/70"
+                  )}
+                >
+                  📍 Timeline
+                </button>
+                <button
+                  onClick={() => setActiveView('chat')}
+                  className={cn(
+                    "flex-1 rounded-lg px-3 py-2 text-[11px] font-semibold transition-all",
+                    activeView === 'chat'
+                      ? "bg-gradient-to-r from-cy to-vi text-bg shadow-md"
+                      : "bg-fg/10 text-fg/70"
+                  )}
+                >
+                  💬 Ask AI
+                </button>
+                <button
+                  onClick={() => setActiveView('plan')}
+                  className={cn(
+                    "flex-1 rounded-lg px-3 py-2 text-[11px] font-semibold transition-all",
+                    activeView === 'plan'
+                      ? "bg-gradient-to-r from-cy to-vi text-bg shadow-md"
+                      : "bg-fg/10 text-fg/70"
+                  )}
+                >
+                  🤝 Plan
+                </button>
+              </div>
+
+              {/* App Content */}
+              <div className="h-[600px] overflow-y-auto bg-bg px-4 pb-6">
         <AnimatePresence mode="wait">
           {activeView === 'timeline' && (
             <motion.div
@@ -364,12 +383,12 @@ export function Demo() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.4 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <div className="mb-6 text-center">
-                <h3 className="mb-2 text-xl font-semibold text-fg">Your Recent Places</h3>
-                <p className="text-sm text-fg/60">
-                  A glimpse into places you have visited and how you felt
+              <div className="mb-4 text-center">
+                <h3 className="mb-1 text-lg font-semibold text-fg">Your Recent Places</h3>
+                <p className="text-xs text-fg/60">
+                  A glimpse into places you have visited
                 </p>
               </div>
               <div className="space-y-3">
@@ -451,43 +470,43 @@ export function Demo() {
               transition={{ duration: 0.4 }}
               className="flex h-[550px] flex-col"
             >
-              <div className="mb-4 flex items-center gap-3 border-b border-fg/10 pb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cy via-vi to-am">
-                  <div className="h-3 w-3 rounded-full bg-bg animate-pulse"></div>
+              <div className="mb-3 flex items-center gap-2 border-b border-fg/10 pb-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cy via-vi to-am">
+                  <div className="h-2.5 w-2.5 rounded-full bg-bg animate-pulse"></div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-fg">Your AI Twin</h3>
-                  <p className="text-xs text-fg/60">I understand your patterns and can answer questions about your life</p>
+                  <h3 className="text-base font-semibold text-fg">Your AI Twin</h3>
+                  <p className="text-[10px] text-fg/60">Ask me about your patterns</p>
                 </div>
-                <div className="flex items-center gap-1.5 rounded-full bg-green-500/10 px-3 py-1.5 border border-green-500/20">
-                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-xs font-medium text-green-600">Active</span>
+                <div className="flex items-center gap-1 rounded-full bg-green-500/10 px-2 py-1 border border-green-500/20">
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                  <span className="text-[10px] font-medium text-green-600">Active</span>
                 </div>
               </div>
 
               {chatMessages.length === 0 && (
-                <div className="mb-4">
-                  <p className="mb-3 text-sm text-fg/60">Try asking me:</p>
-                  <div className="grid gap-3 sm:grid-cols-2">
+                <div className="mb-3">
+                  <p className="mb-2 text-xs text-fg/60">Try asking me:</p>
+                  <div className="grid gap-2">
                     {conversationQuestions.map((item) => (
                       <button
                         key={item.key}
                         onClick={() => playConversation(item.key)}
                         disabled={isPlayingConversation}
                         className={cn(
-                          "group rounded-xl border p-4 text-left transition-all",
+                          "group rounded-lg border p-3 text-left transition-all",
                           isPlayingConversation
                             ? "border-fg/10 bg-fg/5 text-fg/30 cursor-not-allowed"
-                            : "border-cy/30 bg-gradient-to-br from-cy/5 to-vi/5 hover:border-cy/50 hover:from-cy/10 hover:to-vi/10 hover:shadow-lg"
+                            : "border-cy/30 bg-gradient-to-br from-cy/5 to-vi/5 hover:border-cy/50 hover:from-cy/10 hover:to-vi/10"
                         )}
                       >
-                        <div className="mb-1.5 flex items-start gap-2">
-                          <span className="mt-0.5 text-cy text-lg">💭</span>
-                          <p className="text-sm font-medium text-fg leading-snug">
+                        <div className="mb-1 flex items-start gap-1.5">
+                          <span className="mt-0.5 text-cy text-sm">💭</span>
+                          <p className="text-xs font-medium text-fg leading-snug">
                             {item.question}
                           </p>
                         </div>
-                        <p className="text-xs text-fg/50 pl-7">
+                        <p className="text-[10px] text-fg/50 pl-5">
                           {item.description}
                         </p>
                       </button>
@@ -496,7 +515,7 @@ export function Demo() {
                 </div>
               )}
 
-              <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-4 scroll-smooth">
+              <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-3 scroll-smooth">
                 {chatMessages.map((message, index) => (
                   <motion.div
                     key={index}
@@ -504,18 +523,18 @@ export function Demo() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                     className={cn(
-                      "flex gap-3",
+                      "flex gap-2",
                       message.role === 'user' ? "justify-end" : "justify-start"
                     )}
                   >
                     {message.role === 'ai' && (
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
-                        <div className="h-2 w-2 rounded-full bg-bg"></div>
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
+                        <div className="h-1.5 w-1.5 rounded-full bg-bg"></div>
                       </div>
                     )}
                     <div
                       className={cn(
-                        "max-w-[80%] rounded-2xl px-4 py-3 text-sm",
+                        "max-w-[75%] rounded-2xl px-3 py-2 text-xs",
                         message.role === 'user'
                           ? "bg-gradient-to-r from-cy to-vi text-bg"
                           : "bg-fg/10 text-fg"
@@ -524,7 +543,7 @@ export function Demo() {
                       {message.text}
                     </div>
                     {message.role === 'user' && (
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fg to-fg/80 text-xs font-bold text-bg">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fg to-fg/80 text-[9px] font-bold text-bg">
                         YOU
                       </div>
                     )}
@@ -534,27 +553,27 @@ export function Demo() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex gap-3"
+                    className="flex gap-2"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
-                      <div className="h-2 w-2 rounded-full bg-bg"></div>
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
+                      <div className="h-1.5 w-1.5 rounded-full bg-bg"></div>
                     </div>
-                    <div className="flex items-center gap-1 rounded-2xl bg-fg/10 px-4 py-3">
-                      <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.3s]"></div>
-                      <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.15s]"></div>
-                      <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40"></div>
+                    <div className="flex items-center gap-1 rounded-2xl bg-fg/10 px-3 py-2">
+                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.3s]"></div>
+                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.15s]"></div>
+                      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40"></div>
                     </div>
                   </motion.div>
                 )}
               </div>
 
-              <div className="mt-4 rounded-lg border border-fg/10 bg-fg/5 px-4 py-3 text-center">
-                <p className="text-xs text-fg/60">
+              <div className="mt-3 rounded-lg border border-fg/10 bg-fg/5 px-3 py-2 text-center">
+                <p className="text-[10px] text-fg/60">
                   {isPlayingConversation
                     ? "💬 Conversation in progress..."
                     : chatMessages.length > 0
-                    ? "✨ This demo shows how AI understands your life patterns"
-                    : "Select a question above to start a conversation"}
+                    ? "✨ Demo showing AI understanding"
+                    : "Select a question above to start"}
                 </p>
               </div>
             </motion.div>
@@ -570,50 +589,49 @@ export function Demo() {
               className="flex flex-col h-[550px]"
             >
               {selectedFriends.length === 0 && (
-                <div className="mb-6">
-                  <h3 className="mb-2 text-xl font-semibold text-fg">Plan with Friends</h3>
-                  <p className="text-sm text-fg/60">
-                    Select one or more friends to start planning together
+                <div className="mb-4">
+                  <h3 className="mb-1 text-lg font-semibold text-fg">Plan with Friends</h3>
+                  <p className="text-xs text-fg/60">
+                    Select friends to start planning
                   </p>
                 </div>
               )}
 
               {planMessages.length === 0 && (
-                <div className="mb-6">
-                  <div className="mb-3 flex items-center justify-between">
-                    <p className="text-sm font-medium text-fg/80">Your Friends</p>
+                <div className="mb-4">
+                  <div className="mb-2 flex items-center justify-between">
+                    <p className="text-xs font-medium text-fg/80">Your Friends</p>
                     {selectedFriends.length > 0 && (
                       <button
                         onClick={() => {
                           setSelectedFriends([])
                           setPlanMessages([])
                         }}
-                        className="text-xs text-fg/60 hover:text-fg"
+                        className="text-[10px] text-fg/60 hover:text-fg"
                       >
                         Clear all
                       </button>
                     )}
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-2 grid-cols-2">
                     {friends.map((friend) => {
                       const isSelected = selectedFriends.find(f => f.id === friend.id)
                       return (
                         <motion.button
                           key={friend.id}
                           onClick={() => toggleFriendSelection(friend)}
-                          whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           className={cn(
-                            "rounded-xl border p-4 text-left transition-all",
+                            "rounded-lg border p-2.5 text-left transition-all",
                             isSelected
-                              ? "border-cy/50 bg-gradient-to-br from-cy/10 to-vi/10 shadow-lg"
-                              : "border-fg/10 bg-fg/5 hover:border-fg/20 hover:bg-fg/10"
+                              ? "border-cy/50 bg-gradient-to-br from-cy/10 to-vi/10 shadow-md"
+                              : "border-fg/10 bg-fg/5 hover:border-fg/20"
                           )}
                         >
-                          <div className="mb-2 flex items-center justify-between">
+                          <div className="mb-1.5 flex items-center justify-between">
                             <div
                               className={cn(
-                                'flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-bold text-bg shadow-md bg-gradient-to-br',
+                                'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold text-bg shadow-sm bg-gradient-to-br',
                                 friend.color,
                                 isSelected ? "border-cy" : "border-bg"
                               )}
@@ -622,21 +640,21 @@ export function Demo() {
                             </div>
                             <div
                               className={cn(
-                                "h-5 w-5 rounded-full border-2 transition-all",
+                                "h-4 w-4 rounded-full border-2 transition-all flex items-center justify-center",
                                 isSelected
                                   ? "border-cy bg-cy"
                                   : "border-fg/30 bg-transparent"
                               )}
                             >
                               {isSelected && (
-                                <svg className="h-full w-full text-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="h-3 w-3 text-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
                               )}
                             </div>
                           </div>
-                          <p className="mb-1 font-semibold text-fg">{friend.name}</p>
-                          <p className="text-xs text-fg/60">{friend.interests.join(', ')}</p>
+                          <p className="mb-0.5 text-xs font-semibold text-fg">{friend.name}</p>
+                          <p className="text-[9px] text-fg/60 leading-tight">{friend.interests.slice(0, 2).join(', ')}</p>
                         </motion.button>
                       )
                     })}
@@ -648,16 +666,16 @@ export function Demo() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6"
+                  className="mb-4"
                 >
-                  <div className="mb-4 rounded-xl border border-cy/30 bg-gradient-to-r from-cy/10 to-vi/10 p-4">
-                    <div className="mb-2 flex items-center gap-2">
-                      <div className="flex -space-x-2">
+                  <div className="mb-3 rounded-lg border border-cy/30 bg-gradient-to-r from-cy/10 to-vi/10 p-3">
+                    <div className="flex items-center gap-2">
+                      <div className="flex -space-x-1.5">
                         {selectedFriends.map((friend) => (
                           <div
                             key={friend.id}
                             className={cn(
-                              'flex h-8 w-8 items-center justify-center rounded-full border-2 border-bg text-xs font-bold text-bg shadow-lg bg-gradient-to-br',
+                              'flex h-6 w-6 items-center justify-center rounded-full border-2 border-bg text-[10px] font-bold text-bg shadow-md bg-gradient-to-br',
                               friend.color
                             )}
                           >
@@ -665,8 +683,8 @@ export function Demo() {
                           </div>
                         ))}
                       </div>
-                      <p className="text-sm font-medium text-fg">
-                        Planning with {selectedFriends.map(f => f.name).join(', ')}
+                      <p className="text-xs font-medium text-fg">
+                        {selectedFriends.map(f => f.name).join(', ')}
                       </p>
                     </div>
                   </div>
@@ -674,10 +692,10 @@ export function Demo() {
                     onClick={handleStartPlanConversation}
                     disabled={isPlayingPlan}
                     className={cn(
-                      "w-full rounded-lg px-6 py-4 text-sm font-semibold shadow-lg transition-all",
+                      "w-full rounded-lg px-4 py-3 text-xs font-semibold shadow-md transition-all",
                       isPlayingPlan
                         ? "bg-fg/10 text-fg/30 cursor-not-allowed"
-                        : "bg-gradient-to-r from-cy to-vi text-bg hover:shadow-xl"
+                        : "bg-gradient-to-r from-cy to-vi text-bg"
                     )}
                   >
                     Ask AI for Suggestions
@@ -692,20 +710,20 @@ export function Demo() {
                   transition={{ duration: 0.5 }}
                   className="flex flex-1 flex-col"
                 >
-                  <div className="mb-4 flex items-center justify-between border-b border-fg/10 pb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-cy via-vi to-am flex items-center justify-center">
-                        <div className="h-3 w-3 rounded-full bg-bg animate-pulse"></div>
+                  <div className="mb-3 flex items-center justify-between border-b border-fg/10 pb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cy via-vi to-am flex items-center justify-center">
+                        <div className="h-2.5 w-2.5 rounded-full bg-bg animate-pulse"></div>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-fg">Planning with Friends</h3>
-                        <div className="flex items-center gap-2">
+                        <h3 className="text-sm font-semibold text-fg">Planning</h3>
+                        <div className="flex items-center gap-1.5">
                           <div className="flex -space-x-1">
                             {selectedFriends.map((friend) => (
                               <div
                                 key={friend.id}
                                 className={cn(
-                                  'flex h-5 w-5 items-center justify-center rounded-full border border-bg text-[10px] font-bold text-bg bg-gradient-to-br',
+                                  'flex h-4 w-4 items-center justify-center rounded-full border border-bg text-[8px] font-bold text-bg bg-gradient-to-br',
                                   friend.color
                                 )}
                               >
@@ -713,7 +731,7 @@ export function Demo() {
                               </div>
                             ))}
                           </div>
-                          <p className="text-xs text-fg/60">
+                          <p className="text-[10px] text-fg/60">
                             {selectedFriends.map(f => f.name).join(', ')}
                           </p>
                         </div>
@@ -725,14 +743,14 @@ export function Demo() {
                           setPlanMessages([])
                           setSelectedFriends([])
                         }}
-                        className="rounded-lg border border-fg/20 bg-fg/5 px-3 py-1.5 text-xs font-medium text-fg/70 transition-all hover:bg-fg/10"
+                        className="rounded-md border border-fg/20 bg-fg/5 px-2 py-1 text-[10px] font-medium text-fg/70"
                       >
-                        ← Choose Different Friends
+                        ← Back
                       </button>
                     )}
                   </div>
 
-                  <div ref={planContainerRef} className="flex-1 overflow-y-auto space-y-4 scroll-smooth">
+                  <div ref={planContainerRef} className="flex-1 overflow-y-auto space-y-3 scroll-smooth">
                     {planMessages.map((message, index) => (
                       <motion.div
                         key={index}
@@ -740,18 +758,18 @@ export function Demo() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className={cn(
-                          "flex gap-3",
+                          "flex gap-2",
                           message.role === 'user' ? "justify-end" : "justify-start"
                         )}
                       >
                         {message.role === 'ai' && (
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
-                            <div className="h-2 w-2 rounded-full bg-bg"></div>
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
+                            <div className="h-1.5 w-1.5 rounded-full bg-bg"></div>
                           </div>
                         )}
                         <div
                           className={cn(
-                            "max-w-[80%] rounded-2xl px-4 py-3 text-sm",
+                            "max-w-[75%] rounded-2xl px-3 py-2 text-xs",
                             message.role === 'user'
                               ? "bg-gradient-to-r from-cy to-vi text-bg"
                               : "bg-fg/10 text-fg"
@@ -760,7 +778,7 @@ export function Demo() {
                           {message.text}
                         </div>
                         {message.role === 'user' && (
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fg to-fg/80 text-xs font-bold text-bg">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fg to-fg/80 text-[9px] font-bold text-bg">
                             YOU
                           </div>
                         )}
@@ -770,25 +788,25 @@ export function Demo() {
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex gap-3"
+                        className="flex gap-2"
                       >
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
-                          <div className="h-2 w-2 rounded-full bg-bg"></div>
+                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cy to-vi">
+                          <div className="h-1.5 w-1.5 rounded-full bg-bg"></div>
                         </div>
-                        <div className="flex items-center gap-1 rounded-2xl bg-fg/10 px-4 py-3">
-                          <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.3s]"></div>
-                          <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.15s]"></div>
-                          <div className="h-2 w-2 animate-bounce rounded-full bg-fg/40"></div>
+                        <div className="flex items-center gap-1 rounded-2xl bg-fg/10 px-3 py-2">
+                          <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.3s]"></div>
+                          <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40 [animation-delay:-0.15s]"></div>
+                          <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-fg/40"></div>
                         </div>
                       </motion.div>
                     )}
                   </div>
 
-                  <div className="mt-4 rounded-lg border border-fg/10 bg-fg/5 px-4 py-3 text-center">
-                    <p className="text-xs text-fg/60">
+                  <div className="mt-3 rounded-lg border border-fg/10 bg-fg/5 px-3 py-2 text-center">
+                    <p className="text-[10px] text-fg/60">
                       {isPlayingPlan
                         ? "💬 Thinking..."
-                        : "✨ This demo shows how AI plans using your group's combined preferences"}
+                        : "✨ Demo using combined preferences"}
                     </p>
                   </div>
                 </motion.div>
@@ -797,15 +815,22 @@ export function Demo() {
               {selectedFriends.length === 0 && planMessages.length === 0 && (
                 <div className="flex flex-1 items-center justify-center text-center">
                   <div>
-                    <div className="mb-4 text-6xl">👥</div>
-                    <p className="text-fg/60">Select one or more friends to start planning</p>
-                    <p className="text-sm text-fg/50">Your AI twin will suggest places that work for everyone</p>
+                    <div className="mb-3 text-5xl">👥</div>
+                    <p className="text-xs text-fg/60 mb-1">Select friends to start planning</p>
+                    <p className="text-[10px] text-fg/50">AI suggests places for everyone</p>
                   </div>
                 </div>
               )}
             </motion.div>
           )}
         </AnimatePresence>
+              </div>
+            </div>
+            
+            {/* Home Indicator */}
+            <div className="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 rounded-full bg-fg/20"></div>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
@@ -813,7 +838,7 @@ export function Demo() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-6 text-center text-sm text-fg/60"
+        className="mt-8 text-center text-sm text-fg/60"
       >
         This is a demo with sample data. The full app will learn from your real experiences.
       </motion.div>

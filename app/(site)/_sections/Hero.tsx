@@ -175,109 +175,137 @@ export function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative"
           >
-            <div className="relative w-full max-w-sm rounded-2xl border border-fg/20 bg-bg/50 p-6 backdrop-blur-sm shadow-2xl">
-              {/* Preview Badge */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-vi/20 to-am/20 border border-vi/30 px-3 py-1 text-[11px] uppercase tracking-wider text-vi font-semibold backdrop-blur-sm">
-                🧠 Your AI Twin
-              </div>
+            {/* Phone Mockup */}
+            <div className="relative mx-auto w-[320px]">
+              <div className="relative rounded-[3rem] border-[14px] border-fg/90 bg-fg/90 shadow-2xl">
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 z-10 h-6 w-40 -translate-x-1/2 rounded-b-3xl bg-fg/90"></div>
+                
+                {/* Screen */}
+                <div className="relative overflow-hidden rounded-[2.3rem] bg-gradient-to-b from-bg via-bg/95 to-bg/90">
+                  {/* Status Bar */}
+                  <div className="flex items-center justify-between bg-bg px-6 pb-2 pt-8 text-xs text-fg/60">
+                    <span>9:41</span>
+                    <div className="flex items-center gap-1">
+                      <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                      </svg>
+                      <svg className="h-3 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* App Content */}
+                  <div className="h-[580px] overflow-y-auto px-5 pb-6">
+                    {/* Preview Badge */}
+                    <div className="mb-4 text-center rounded-full bg-gradient-to-r from-vi/20 to-am/20 border border-vi/30 px-3 py-1.5 text-[11px] uppercase tracking-wider text-vi font-semibold backdrop-blur-sm">
+                      🧠 Your AI Twin
+                    </div>
               
-              {/* Stats Header */}
-              <div className="mb-4 grid grid-cols-3 gap-2 rounded-lg bg-gradient-to-r from-cy/5 to-vi/5 p-3 border border-cy/20">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-cy">47</div>
-                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Places</div>
-                </div>
-                <div className="text-center border-x border-fg/10">
-                  <div className="text-lg font-bold text-vi">128</div>
-                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Memories</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-am">23</div>
-                  <div className="text-[9px] text-fg/60 uppercase tracking-wide">Insights</div>
-                </div>
-              </div>
+                    {/* Stats Header */}
+                    <div className="mb-4 grid grid-cols-3 gap-2 rounded-lg bg-gradient-to-r from-cy/5 to-vi/5 p-3 border border-cy/20">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-cy">47</div>
+                        <div className="text-[9px] text-fg/60 uppercase tracking-wide">Places</div>
+                      </div>
+                      <div className="text-center border-x border-fg/10">
+                        <div className="text-lg font-bold text-vi">128</div>
+                        <div className="text-[9px] text-fg/60 uppercase tracking-wide">Memories</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-am">23</div>
+                        <div className="text-[9px] text-fg/60 uppercase tracking-wide">Insights</div>
+                      </div>
+                    </div>
 
-              {/* Recent Places */}
-              <div className="mb-4">
-                <div className="mb-2 flex items-center justify-between">
-                  <h4 className="text-sm font-semibold text-fg">Recent Places</h4>
-                  <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse"></div>
-                </div>
-                <div className="space-y-2">
-                <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center text-lg">
-                    📍
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-fg">Café Luna</div>
-                    <div className="text-xs text-fg/60">2h ago • Relaxed</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-vi to-am flex items-center justify-center text-lg">
-                    🌊
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-fg">Beach Park</div>
-                    <div className="text-xs text-fg/60">Yesterday • Happy</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-am to-cy flex items-center justify-center text-lg">
-                    🎨
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-fg">Art Gallery</div>
-                    <div className="text-xs text-fg/60">3 days ago • Focused</div>
-                  </div>
-                </div>
-                </div>
-              </div>
+                    {/* Recent Places */}
+                    <div className="mb-4">
+                      <div className="mb-2 flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-fg">Recent Places</h4>
+                        <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse"></div>
+                      </div>
+                      <div className="space-y-2">
+                      <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center text-lg">
+                          📍
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-fg text-sm">Café Luna</div>
+                          <div className="text-xs text-fg/60">2h ago • Relaxed</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-vi to-am flex items-center justify-center text-lg">
+                          🌊
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-fg text-sm">Beach Park</div>
+                          <div className="text-xs text-fg/60">Yesterday • Happy</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 rounded-lg bg-fg/5 p-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-am to-cy flex items-center justify-center text-lg">
+                          🎨
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-fg text-sm">Art Gallery</div>
+                          <div className="text-xs text-fg/60">3 days ago • Focused</div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
 
-              {/* Pattern Detection */}
-              <div className="mb-4">
-                <div className="mb-2 flex items-center gap-2">
-                  <h4 className="text-sm font-semibold text-fg">Patterns</h4>
-                  <div className="flex gap-1">
-                    <div className="h-1 w-1 rounded-full bg-cy animate-pulse"></div>
-                    <div className="h-1 w-1 rounded-full bg-vi animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="h-1 w-1 rounded-full bg-am animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {['Waterfront', 'Weekend', 'Quiet', 'Relaxed'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-cy/20 px-2.5 py-1 text-[10px] text-cy font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                    {/* Pattern Detection */}
+                    <div className="mb-4">
+                      <div className="mb-2 flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-fg">Patterns</h4>
+                        <div className="flex gap-1">
+                          <div className="h-1 w-1 rounded-full bg-cy animate-pulse"></div>
+                          <div className="h-1 w-1 rounded-full bg-vi animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                          <div className="h-1 w-1 rounded-full bg-am animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {['Waterfront', 'Weekend', 'Quiet', 'Relaxed'].map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-cy/20 px-2.5 py-1 text-[10px] text-cy font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-              {/* AI Insight */}
-              <div className="rounded-xl bg-gradient-to-br from-vi/20 to-am/10 p-3 border border-vi/30">
-                <div className="mb-2 flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center">
-                    <div className="h-2 w-2 rounded-full bg-bg animate-pulse"></div>
+                    {/* AI Insight */}
+                    <div className="rounded-xl bg-gradient-to-br from-vi/20 to-am/10 p-3 border border-vi/30">
+                      <div className="mb-2 flex items-center gap-2">
+                        <div className="h-6 w-6 rounded-full bg-gradient-to-br from-cy to-vi flex items-center justify-center">
+                          <div className="h-2 w-2 rounded-full bg-bg animate-pulse"></div>
+                        </div>
+                        <span className="text-xs font-medium text-fg/70">AI Insight</span>
+                        <div className="ml-auto text-xs text-fg/50">Live</div>
+                      </div>
+                      <p className="text-xs text-fg/80 leading-relaxed mb-2">
+                        &ldquo;Your waterfront visits spike on weekends when stressed. I found 3 similar spots with better accessibility.&rdquo;
+                      </p>
+                      <div className="flex items-center gap-2 text-[10px] text-fg/60">
+                        <span className="flex items-center gap-1">
+                          <div className="h-1 w-1 rounded-full bg-green-500"></div>
+                          87% confidence
+                        </span>
+                        <span>•</span>
+                        <span>Based on 12 visits</span>
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-xs font-medium text-fg/70">AI Insight</span>
-                  <div className="ml-auto text-xs text-fg/50">Live</div>
                 </div>
-                <p className="text-xs text-fg/80 leading-relaxed mb-2">
-                  &ldquo;Your waterfront visits spike on weekends when stressed. I found 3 similar spots with better accessibility.&rdquo;
-                </p>
-                <div className="flex items-center gap-2 text-[10px] text-fg/60">
-                  <span className="flex items-center gap-1">
-                    <div className="h-1 w-1 rounded-full bg-green-500"></div>
-                    87% confidence
-                  </span>
-                  <span>•</span>
-                  <span>Based on 12 visits</span>
-                </div>
+                
+                {/* Home Indicator */}
+                <div className="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 rounded-full bg-fg/20"></div>
               </div>
             </div>
           </motion.div>
