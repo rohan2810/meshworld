@@ -41,7 +41,7 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
   return (
     <div className={cn('relative', className)}>
       {/* iPhone Frame */}
-      <div className="relative mx-auto w-[280px] md:w-[320px]">
+      <div className="relative mx-auto w-[300px] md:w-[340px]">
         {/* Frame */}
         <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
           {/* Notch */}
@@ -56,7 +56,7 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="h-[600px] w-full"
+                className="h-[550px] md:h-[600px] w-full overflow-hidden"
               >
                 {screens[activeScreen]?.mockup}
               </motion.div>
@@ -68,14 +68,14 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
         </div>
 
         {/* Screen Navigation Dots */}
-        <div className="mt-6 flex justify-center gap-2">
+        <div className="mt-4 flex justify-center gap-2">
           {screens.map((_, index) => (
             <button
               key={index}
               onClick={() => handleScreenChange(index)}
               className={cn(
-                'h-2 rounded-full transition-all cursor-pointer',
-                index === activeScreen ? 'w-8 bg-cy' : 'w-2 bg-fg/30 hover:bg-fg/50'
+                'h-1.5 rounded-full transition-all cursor-pointer',
+                index === activeScreen ? 'w-6 bg-cy' : 'w-1.5 bg-fg/30 hover:bg-fg/50'
               )}
               aria-label={`View ${screens[index].title}`}
             />
@@ -84,11 +84,11 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
       </div>
 
       {/* Screen Info */}
-      <div className="mt-8 text-center">
-        <h3 className="mb-2 text-xl font-semibold text-fg">
+      <div className="mt-4 text-center">
+        <h3 className="mb-1 text-base font-semibold text-fg md:text-lg">
           {screens[activeScreen]?.title}
         </h3>
-        <p className="text-sm text-fg/70">{screens[activeScreen]?.description}</p>
+        <p className="text-xs text-fg/70 md:text-sm">{screens[activeScreen]?.description}</p>
       </div>
     </div>
   )

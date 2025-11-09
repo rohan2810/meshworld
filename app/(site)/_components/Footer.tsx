@@ -62,7 +62,7 @@ export function Footer() {
               </button>
               <a
                 href="mailto:hello@setuai.com"
-                className="text-fg/70 transition-colors hover:text-cy focus-visible:text-cy"
+                className="text-fg/70 transition-colors hover:text-cy focus-visible:text-cy cursor-pointer"
               >
                 Contact
               </a>

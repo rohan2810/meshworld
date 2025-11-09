@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
-import { addToWaitlist } from '@/lib/supabase'
 import { Button } from './Button'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
@@ -32,16 +31,12 @@ export function WaitlistForm() {
     setStatus('loading')
     setErrorMessage('')
 
-    const result = await addToWaitlist(email, useCase || undefined)
-
-    if (result.success) {
+    // Mock successful submission
+    setTimeout(() => {
       setStatus('success')
       setEmail('')
       setUseCase('')
-    } else {
-      setStatus('error')
-      setErrorMessage(result.error || 'An error occurred. Please try again.')
-    }
+    }, 800)
   }
 
   return (

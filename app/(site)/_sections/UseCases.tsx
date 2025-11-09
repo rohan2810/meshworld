@@ -132,7 +132,7 @@ export function UseCases() {
         >
           <h2
             id="use-cases-heading"
-            className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
+            className="mb-4 text-3xl font-bold leading-tight tracking-tight text-fg md:text-4xl"
           >
             Use cases that feel{' '}
             <span className="text-gradient">personal</span>.
@@ -163,11 +163,11 @@ export function UseCases() {
                 <span className="text-sm text-fg/60">Private by default. Built for recall + reflection.</span>
               </div>
               
-              <h3 className="mb-4 text-2xl font-bold text-fg">
+              <h3 className="mb-4 text-lg font-bold text-fg">
                 Know what you actually enjoy when it&apos;s just you.
               </h3>
               
-              <p className="mb-5 text-base leading-relaxed text-fg/70">
+              <p className="mb-5 text-sm leading-relaxed text-fg/70">
                 SetuAI makes it effortless to ask your past self questions and get honest answers
                 grounded in places, moods, and notes you already captured.
               </p>
@@ -180,7 +180,7 @@ export function UseCases() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
-                    className="flex items-start gap-3 text-base text-fg/80"
+                    className="flex items-start gap-3 text-sm text-fg/80"
                   >
                     <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-cy/20 text-xs font-bold text-cy">
                       ?
@@ -231,11 +231,11 @@ export function UseCases() {
                 <span className="text-sm text-fg/60">Shared tastes without the spreadsheet.</span>
               </div>
               
-              <h3 className="mb-4 text-2xl font-bold text-fg">
+              <h3 className="mb-4 text-lg font-bold text-fg">
                 Every hang, coffee, or trip respects everyone&apos;s preferences.
               </h3>
               
-              <p className="mb-5 text-base leading-relaxed text-fg/70">
+              <p className="mb-5 text-sm leading-relaxed text-fg/70">
                 Blend twins with trusted people to unlock co-recommendations, see overlaps, and let the
                 model draft the plan.
               </p>
@@ -248,7 +248,7 @@ export function UseCases() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
-                    className="flex items-start gap-3 text-base text-fg/80"
+                    className="flex items-start gap-3 text-sm text-fg/80"
                   >
                     <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-vi/20 text-xs font-bold text-vi">
                       ?
@@ -261,14 +261,15 @@ export function UseCases() {
               {/* Interactive Examples */}
               <div className="space-y-4">
                 {/* Example Toggle */}
-                <div className="flex gap-2 rounded-xl bg-fg/5 p-1">
+                <div className="flex gap-2 rounded-xl bg-fg/5 p-1 border border-fg/10">
                   <button
                     onClick={() => setActiveExample('coffee')}
                     className={cn(
-                      'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all',
+                      'flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer',
+                      'border-2 shadow-sm',
                       activeExample === 'coffee'
-                        ? 'bg-gradient-to-r from-vi to-purple-500 text-bg shadow-lg'
-                        : 'text-fg/60 hover:text-fg'
+                        ? 'bg-gradient-to-r from-vi to-purple-500 text-bg shadow-lg border-vi/50 scale-[1.02]'
+                        : 'text-fg/60 hover:text-fg border-transparent hover:border-fg/20 hover:bg-fg/10'
                     )}
                   >
                     Coffee ☕
@@ -276,10 +277,11 @@ export function UseCases() {
                   <button
                     onClick={() => setActiveExample('trip')}
                     className={cn(
-                      'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all',
+                      'flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer',
+                      'border-2 shadow-sm',
                       activeExample === 'trip'
-                        ? 'bg-gradient-to-r from-vi to-purple-500 text-bg shadow-lg'
-                        : 'text-fg/60 hover:text-fg'
+                        ? 'bg-gradient-to-r from-vi to-purple-500 text-bg shadow-lg border-vi/50 scale-[1.02]'
+                        : 'text-fg/60 hover:text-fg border-transparent hover:border-fg/20 hover:bg-fg/10'
                     )}
                   >
                     Trip 🗺️
@@ -499,28 +501,6 @@ export function UseCases() {
             </motion.div>
           ))}
         </div>
-
-        {/* Contact CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto max-w-2xl text-center rounded-2xl border border-fg/20 bg-bg/50 p-8 backdrop-blur-sm"
-        >
-          <p className="mb-3 text-lg text-fg/80">
-            Building with friends, creatives, and planners who want real context.
-          </p>
-          <p className="text-base text-fg/70">
-            Say hi:{' '}
-            <a
-              href="mailto:hello@setuai.com"
-              className="font-medium text-cy transition-colors hover:text-cy/80"
-            >
-              hello@setuai.com
-            </a>
-          </p>
-        </motion.div>
       </div>
     </Section>
   )

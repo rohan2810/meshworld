@@ -317,9 +317,9 @@ export function Demo() {
         {/* Phone Mockup */}
         <div className="relative mx-auto w-full max-w-[380px]">
           {/* Phone Frame */}
-          <div className="relative rounded-[3rem] border-[14px] border-fg/90 bg-fg/90 shadow-2xl">
+          <div className="relative rounded-[3rem] border-[14px] border-fg/20 bg-fg/20 shadow-2xl">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 z-10 h-6 w-40 -translate-x-1/2 rounded-b-3xl bg-fg/90"></div>
+            <div className="absolute top-0 left-1/2 z-10 h-6 w-40 -translate-x-1/2 rounded-b-3xl bg-fg/20"></div>
             
             {/* Screen */}
             <div className="relative overflow-hidden rounded-[2.3rem] bg-bg">

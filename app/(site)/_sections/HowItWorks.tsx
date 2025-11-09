@@ -9,51 +9,6 @@ import { MorphingBlob } from '../_components/MorphingBlob'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-// Controlled version of MobileAppPreview for step 1
-function ControlledMobilePreview({ screens, activeScreen }: { screens: Array<{ id: string; title: string; description: string; mockup: React.ReactNode }>, activeScreen: number }) {
-  return (
-    <div className="relative">
-      <div className="relative mx-auto w-[280px] md:w-[320px]">
-        <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
-          <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
-          <div className="relative overflow-hidden rounded-[2rem] bg-gray-950">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeScreen}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-                className="h-[600px] w-full"
-              >
-                {screens[activeScreen]?.mockup}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-          <div className="mx-auto mt-2 h-1 w-32 rounded-full bg-white/30" />
-        </div>
-        <div className="mt-6 flex justify-center gap-2">
-          {screens.map((_, index) => (
-            <div
-              key={index}
-              className={cn(
-                'h-2 rounded-full transition-all duration-300',
-                index === activeScreen ? 'w-8 bg-cy' : 'w-2 bg-fg/30'
-              )}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="mt-8 text-center">
-        <h3 className="mb-2 text-xl font-semibold text-fg">
-          {screens[activeScreen]?.title}
-        </h3>
-        <p className="text-sm text-fg/70">{screens[activeScreen]?.description}</p>
-      </div>
-    </div>
-  )
-}
-
 // Controlled version of TwinInteractionDemo for step 4
 function ControlledTwinDemo({ stage }: { stage: number }) {
   const user1 = {
@@ -362,7 +317,13 @@ export function HowItWorks() {
   }, [isPaused, activeStep, subStep])
 
   return (
-    <Section id="how-it-works" aria-labelledby="how-it-works-heading" className="bg-bg/50 gradient-mesh overflow-hidden">
+    <Section 
+      id="how-it-works" 
+      aria-labelledby="how-it-works-heading" 
+      className="bg-bg/50 gradient-mesh overflow-hidden !flex-col !items-stretch" 
+      fullScreen
+      containerClassName="h-screen flex flex-col"
+    >
       <FloatingParticles />
       <div className="absolute top-20 right-20">
         <MorphingBlob color="am" size="md" />
@@ -370,71 +331,36 @@ export function HowItWorks() {
       <div className="absolute bottom-20 left-20">
         <MorphingBlob color="cy" size="sm" />
       </div>
-      <div className="relative">
-        {/* Heading */}
+      
+      {/* Full-screen slide container */}
+      <div className="relative flex-1 flex flex-col">
+        {/* Compact Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="pt-4 pb-2 text-center"
         >
           <h2
             id="how-it-works-heading"
-            className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl"
+            className="mb-1 text-3xl font-bold leading-tight tracking-tight text-fg md:text-4xl"
           >
             How it{' '}
             <span className="text-gradient">works</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-fg/70">
-            Four simple steps to transform your experiences into a private memory graph
+          <p className="text-xs text-fg/60 md:text-sm">
+            Step {activeStep + 1} of {steps.length}
           </p>
         </motion.div>
 
-        {/* Static Step Overview - All 4 Steps Visible */}
-        <div className="mb-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={cn(
-                "rounded-xl border p-4 transition-all cursor-pointer",
-                activeStep === index 
-                  ? "border-cy/50 bg-cy/5 shadow-lg shadow-cy/10" 
-                  : "border-fg/20 bg-bg/30 hover:border-fg/30"
-              )}
-              onClick={() => {
-                setActiveStep(index)
-                setIsPaused(true)
-              }}
-            >
-              <div className={cn(
-                "mb-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold",
-                step.color === 'cy' && 'bg-cy/20 text-cy',
-                step.color === 'vi' && 'bg-vi/20 text-vi',
-                step.color === 'am' && 'bg-am/20 text-am',
-              )}>
-                Step {step.step}
-              </div>
-              <h3 className="text-lg font-bold text-fg mb-1">{step.title}</h3>
-              {step.payoff && (
-                <p className="text-xs text-fg/60 leading-snug">{step.payoff}</p>
-              )}
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mb-8 relative">
-          <div className="relative max-w-2xl mx-auto mb-4">
+        {/* Progress Bar - Compact */}
+        <div className="px-4 mb-2">
+          <div className="relative max-w-2xl mx-auto">
             {/* Background track */}
-            <div className="h-1.5 rounded-full bg-fg/10" />
+            <div className="h-1 rounded-full bg-fg/10" />
             {/* Progress fill */}
             <motion.div
-              className="absolute top-0 left-0 h-1.5 rounded-full bg-gradient-to-r from-cy via-vi to-am"
+              className="absolute top-0 left-0 h-1 rounded-full bg-gradient-to-r from-cy via-vi to-am"
               initial={{ width: '0%' }}
               animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
@@ -453,22 +379,26 @@ export function HowItWorks() {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center gap-4">
+        </div>
+
+        {/* Step Navigation - Compact */}
+        <div className="px-4 mb-2">
+          <div className="flex items-center justify-center gap-2 max-w-2xl mx-auto">
             <button
               onClick={() => setIsPaused(!isPaused)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-fg/5 hover:bg-fg/10 text-sm text-fg/70 hover:text-fg transition-all border border-fg/10"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-fg/5 hover:bg-fg/10 text-xs text-fg/70 hover:text-fg transition-all border border-fg/10"
               aria-label={isPaused ? 'Play animation' : 'Pause animation'}
             >
               {isPaused ? (
                 <>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                   </svg>
                   <span>Play</span>
                 </>
               ) : (
                 <>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
                   <span>Pause</span>
@@ -489,14 +419,14 @@ export function HowItWorks() {
                     return `${stageLabels[subStep]} • ${subStep + 1}/${subStepCount}`
                   }
                 }
-                return `${step.title} • Step ${activeStep + 1} of ${steps.length}`
+                return `${step.title}`
               })()}
             </div>
           </div>
         </div>
 
-        {/* Active Step Content */}
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 items-start">
+         {/* Active Step Content - Fits in remaining space */}
+         <div className="flex-1 grid gap-3 sm:gap-4 lg:grid-cols-2 items-center px-4 pb-2 min-h-0">
           <AnimatePresence mode="wait">
             {/* Text Content */}
             <motion.div
@@ -504,16 +434,16 @@ export function HowItWorks() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="space-y-6"
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="space-y-4"
             >
               <div>
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.1, duration: 0.4 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
                   className={cn(
-                    'mb-4 inline-block rounded-full px-4 py-2 text-sm font-medium',
+                    'mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium',
                     steps[activeStep].color === 'cy' && 'bg-cy/10 text-cy',
                     steps[activeStep].color === 'vi' && 'bg-vi/10 text-vi',
                     steps[activeStep].color === 'am' && 'bg-am/10 text-am',
@@ -524,16 +454,16 @@ export function HowItWorks() {
                 <motion.h3
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  className="mb-4 text-3xl font-bold text-fg md:text-4xl"
+                  transition={{ delay: 0.15, duration: 0.4 }}
+                  className="mb-1 text-xl font-bold text-fg md:text-2xl"
                 >
-                  <span className="text-gradient">Step {steps[activeStep].step} — {steps[activeStep].title}</span>
+                  <span className="text-gradient">{steps[activeStep].title}</span>
                 </motion.h3>
                 <motion.p
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  className="text-lg text-fg/70 leading-relaxed mb-3"
+                  transition={{ delay: 0.2, duration: 0.4 }}
+                  className="text-xs text-fg/70 leading-relaxed mb-1.5 md:text-sm"
                 >
                   {steps[activeStep].description}
                 </motion.p>
@@ -541,13 +471,74 @@ export function HowItWorks() {
                   <motion.p
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                    className="text-base font-medium text-cy/90"
+                    transition={{ delay: 0.25, duration: 0.4 }}
+                    className="text-xs font-medium text-cy/90 md:text-sm"
                   >
                     {steps[activeStep].payoff}
                   </motion.p>
                 )}
               </div>
+
+              {/* Visual Step Timeline */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="space-y-2"
+              >
+                {steps.map((step, idx) => (
+                  <motion.div
+                    key={step.id}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.35 + idx * 0.05 }}
+                    className={cn(
+                      'flex items-center gap-3 rounded-lg p-2 transition-all cursor-pointer',
+                      idx === activeStep 
+                        ? 'bg-gradient-to-r from-cy/20 to-vi/10 border border-cy/30' 
+                        : 'bg-fg/5 border border-transparent hover:border-fg/20'
+                    )}
+                    onClick={() => { setActiveStep(idx); setIsPaused(true); }}
+                  >
+                    <div className={cn(
+                      'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold transition-all',
+                      idx === activeStep
+                        ? 'bg-gradient-to-br from-cy to-vi text-bg shadow-lg'
+                        : idx < activeStep
+                        ? 'bg-cy/30 text-cy'
+                        : 'bg-fg/10 text-fg/40'
+                    )}>
+                      {idx < activeStep && idx !== activeStep ? '✓' : step.step}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className={cn(
+                        'text-xs font-semibold truncate',
+                        idx === activeStep ? 'text-fg' : 'text-fg/60'
+                      )}>
+                        {step.title}
+                      </div>
+                      <div className={cn(
+                        'text-[10px] truncate',
+                        idx === activeStep ? 'text-fg/70' : 'text-fg/40'
+                      )}>
+                        {step.id === 'capture' && '2 capture methods'}
+                        {step.id === 'learn' && 'AI learns patterns'}
+                        {step.id === 'reflect' && 'Ask your twin'}
+                        {step.id === 'connect' && 'Co-plan with friends'}
+                      </div>
+                    </div>
+                    {idx === activeStep && (
+                      <motion.div
+                        layoutId="active-indicator"
+                        className="h-2 w-2 rounded-full bg-cy"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
 
             {/* Visual */}
@@ -556,44 +547,78 @@ export function HowItWorks() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="flex flex-col items-center justify-center min-h-[800px]"
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="flex flex-col items-center justify-center w-full h-full min-h-0"
             >
               {steps[activeStep].visual === 'mobile-dual' && steps[activeStep].mobileScreens ? (
-                <div className="w-full">
-                  <ControlledMobilePreview
-                    screens={steps[activeStep].mobileScreens.map((screen, idx) => ({
-                      id: `${steps[activeStep].id}-${idx}`,
-                      title: steps[activeStep].screenTitles?.[idx] || steps[activeStep].title,
-                      description: idx === 0 
-                        ? 'Auto-import from Google Maps or tap "I\'m here" to check in'
-                        : 'Calendar-triggered reflection prompts after events end',
-                      mockup: screen,
-                    }))}
-                    activeScreen={subStep}
-                  />
+                <div className="w-full max-w-sm mx-auto">
+                  <div className="relative">
+                    <div className="relative mx-auto w-[300px] md:w-[340px]">
+                      <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
+                        <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
+                        <div className="relative overflow-hidden rounded-[2rem] bg-gray-950">
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={subStep}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -20 }}
+                              transition={{ duration: 0.3 }}
+                              className="h-[550px] md:h-[600px] w-full overflow-hidden"
+                            >
+                              {steps[activeStep].mobileScreens?.[subStep]}
+                            </motion.div>
+                          </AnimatePresence>
+                        </div>
+                        <div className="mx-auto mt-2 h-1 w-32 rounded-full bg-white/30" />
+                      </div>
+                      <div className="mt-4 flex justify-center gap-2">
+                        {steps[activeStep].mobileScreens.map((_, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              'h-1.5 rounded-full transition-all cursor-pointer',
+                              index === subStep ? 'w-6 bg-cy' : 'w-1.5 bg-fg/30 hover:bg-fg/50'
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mt-4 text-center">
+                      <h3 className="mb-1 text-base font-semibold text-fg md:text-lg">
+                        {steps[activeStep].screenTitles?.[subStep] || steps[activeStep].title}
+                      </h3>
+                      <p className="text-xs text-fg/70 md:text-sm">
+                        {subStep === 0 
+                          ? 'Auto-import from Google Maps or tap "I\'m here" to check in'
+                          : 'Calendar-triggered reflection prompts after events end'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ) : steps[activeStep].visual === 'mobile' && steps[activeStep].mobileScreen ? (
-                <MobileAppPreview
-                  screens={[
-                    {
-                      id: steps[activeStep].id,
-                      title: steps[activeStep].title,
-                      description: steps[activeStep].description,
-                      mockup: steps[activeStep].mobileScreen,
-                    },
-                  ]}
-                />
+                <div className="w-full max-w-sm mx-auto">
+                  <MobileAppPreview
+                    screens={[
+                      {
+                        id: steps[activeStep].id,
+                        title: steps[activeStep].title,
+                        description: steps[activeStep].description,
+                        mockup: steps[activeStep].mobileScreen,
+                      },
+                    ]}
+                  />
+                </div>
               ) : steps[activeStep].showConnection ? (
-                <div className="w-full">
+                <div className="w-full max-w-4xl mx-auto">
                   <ControlledTwinDemo stage={subStep} />
                 </div>
               ) : (
-                <div className="relative mx-auto w-[280px] md:w-[320px]">
+                <div className="relative mx-auto w-[300px] md:w-[340px]">
                   <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
                     <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
                     <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-                      <div className="h-[600px] w-full p-4 flex items-center justify-center">
+                      <div className="h-[550px] md:h-[600px] w-full p-4 flex items-center justify-center overflow-hidden">
                         <div className="w-full h-full">
                           <DigitalTwinVisualization
                             showLearning={steps[activeStep].showLearning}
@@ -604,12 +629,6 @@ export function HowItWorks() {
                       </div>
                     </div>
                     <div className="mx-auto mt-2 h-1 w-32 rounded-full bg-white/30" />
-                  </div>
-                  <div className="mt-6 text-center">
-                    <h3 className="mb-2 text-xl font-semibold text-fg">
-                      {steps[activeStep].title}
-                    </h3>
-                    <p className="text-sm text-fg/70">AI learning your patterns</p>
                   </div>
                 </div>
               )}

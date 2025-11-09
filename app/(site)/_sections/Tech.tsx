@@ -1,14 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Section } from '../_components/Section'
 import { MorphingBlob } from '../_components/MorphingBlob'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from '../_components/Icon'
-import { cn } from '@/lib/utils'
+import { motion } from 'framer-motion'
 
 export function Tech() {
-  const [showTechnicalDetails, setShowTechnicalDetails] = useState(false)
 
   return (
     <Section id="tech" aria-labelledby="tech-heading" className="bg-bg/50 overflow-hidden">
@@ -64,55 +60,6 @@ export function Tech() {
               <span>All of this is tied to your account, with clear controls over what&apos;s stored and shared.</span>
             </li>
           </ul>
-        </motion.div>
-
-        {/* Technical Overview Accordion */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto max-w-3xl"
-        >
-          <button
-            onClick={() => setShowTechnicalDetails(!showTechnicalDetails)}
-            className="flex w-full items-center justify-between rounded-lg border border-fg/20 bg-bg/50 p-4 text-left transition-all hover:bg-fg/5"
-          >
-            <span className="text-sm font-medium text-fg/70">View technical overview</span>
-            <ChevronDown
-              className={cn(
-                'h-5 w-5 text-fg/50 transition-transform',
-                showTechnicalDetails && 'rotate-180'
-              )}
-            />
-          </button>
-
-          <AnimatePresence>
-            {showTechnicalDetails && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-4 space-y-2 rounded-lg border border-fg/10 bg-bg/30 p-6 text-sm text-fg/70">
-                  <div>
-                    <strong className="text-fg/90">Data:</strong> Timeline/places data from Google Maps or check-ins.
-                  </div>
-                  <div>
-                    <strong className="text-fg/90">Storage:</strong> Vector store + graph DB.
-                  </div>
-                  <div>
-                    <strong className="text-fg/90">Intelligence:</strong> LLM routing for search, reflection, and planning.
-                  </div>
-                  <div>
-                    <strong className="text-fg/90">Twin-to-twin:</strong> Preference embeddings for co-recommendations.
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       </div>
     </Section>
