@@ -496,7 +496,7 @@ export function HowItWorks() {
         </div>
 
         {/* Active Step Content */}
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 items-center">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 items-start">
           <AnimatePresence mode="wait">
             {/* Text Content */}
             <motion.div
@@ -557,7 +557,7 @@ export function HowItWorks() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="flex flex-col items-center min-h-[700px] justify-center"
+              className="flex flex-col items-center justify-center min-h-[800px]"
             >
               {steps[activeStep].visual === 'mobile-dual' && steps[activeStep].mobileScreens ? (
                 <div className="w-full">
