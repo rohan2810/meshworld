@@ -8,6 +8,7 @@ import { Problem } from './_sections/Problem'
 import { HowItWorks } from './_sections/HowItWorks'
 import { Features } from './_sections/Features'
 import { Tech } from './_sections/Tech'
+import { Demo } from './_sections/Demo'
 import { Privacy } from './_sections/Privacy'
 import { UseCases } from './_sections/UseCases'
 import { CTA } from './_sections/CTA'
@@ -26,6 +27,7 @@ export default function HomePage() {
         <UseCases />
         <Features />
         <Tech />
+        <Demo />
         <Privacy />
         <CTA />
       </main>

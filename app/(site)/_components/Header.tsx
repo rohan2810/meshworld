@@ -92,7 +92,7 @@ export function Header() {
               { href: 'how-it-works', label: 'How It Works' },
               { href: 'use-cases', label: 'Use Cases' },
               { href: 'features', label: 'Features' },
-              { href: 'tech', label: 'Technology' },
+              { href: 'demo', label: 'Demo' },
             ].map((link, index) => (
               <motion.a
                 key={link.href}
@@ -178,7 +178,7 @@ export function Header() {
               { href: 'how-it-works', label: 'How It Works' },
               { href: 'use-cases', label: 'Use Cases' },
               { href: 'features', label: 'Features' },
-              { href: 'tech', label: 'Technology' },
+              { href: 'demo', label: 'Try Demo' },
               { href: 'cta', label: 'Join Waitlist' },
             ].map((link) => (
               <motion.a
