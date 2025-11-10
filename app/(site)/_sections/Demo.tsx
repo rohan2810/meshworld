@@ -484,7 +484,7 @@ export function Demo() {
                 </div>
               </div>
 
-              {chatMessages.length === 0 && (
+              {chatMessages.length === 0 ? (
                 <div className="mb-3">
                   <p className="mb-2 text-xs text-fg/60">Try asking me:</p>
                   <div className="grid gap-2">
@@ -513,9 +513,16 @@ export function Demo() {
                     ))}
                   </div>
                 </div>
-              )}
+              ) : (
+                <>
+                  <button
+                    onClick={() => setChatMessages([])}
+                    className="mb-3 flex items-center gap-1.5 text-xs font-medium text-cy hover:text-cy/80 transition-colors"
+                  >
+                    ← Choose Another Question
+                  </button>
 
-              <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-3 scroll-smooth">
+                  <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-3 scroll-smooth">
                 {chatMessages.map((message, index) => (
                   <motion.div
                     key={index}
@@ -565,17 +572,17 @@ export function Demo() {
                     </div>
                   </motion.div>
                 )}
-              </div>
+                  </div>
 
-              <div className="mt-3 rounded-lg border border-fg/10 bg-fg/5 px-3 py-2 text-center">
-                <p className="text-[10px] text-fg/60">
-                  {isPlayingConversation
-                    ? "💬 Conversation in progress..."
-                    : chatMessages.length > 0
-                    ? "✨ Demo showing AI understanding"
-                    : "Select a question above to start"}
-                </p>
-              </div>
+                  <div className="mt-3 rounded-lg border border-fg/10 bg-fg/5 px-3 py-2 text-center">
+                    <p className="text-[10px] text-fg/60">
+                      {isPlayingConversation
+                        ? "💬 Conversation in progress..."
+                        : "✨ Demo showing AI understanding"}
+                    </p>
+                  </div>
+                </>
+              )}
             </motion.div>
           )}
 
