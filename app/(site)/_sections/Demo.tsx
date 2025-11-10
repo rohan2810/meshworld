@@ -833,7 +833,7 @@ export function Demo() {
         </div>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
@@ -841,7 +841,7 @@ export function Demo() {
         className="mt-8 text-center text-sm text-fg/60"
       >
         This is a demo with sample data. The full app will learn from your real experiences.
-      </motion.div>
+      </motion.div> */}
     </Section>
   )
 }

@@ -322,7 +322,7 @@ export function HowItWorks() {
       aria-labelledby="how-it-works-heading" 
       className="bg-bg/50 gradient-mesh overflow-hidden !flex-col !items-stretch" 
       fullScreen
-      containerClassName="h-screen flex flex-col"
+      containerClassName="min-h-screen flex flex-col"
     >
       <FloatingParticles />
       <div className="absolute top-20 right-20">
@@ -426,7 +426,7 @@ export function HowItWorks() {
         </div>
 
          {/* Active Step Content - Fits in remaining space */}
-         <div className="flex-1 grid gap-3 sm:gap-4 lg:grid-cols-2 items-start px-4 pb-4 min-h-0 overflow-y-auto">
+         <div className="flex-1 grid gap-3 sm:gap-4 lg:grid-cols-2 items-start px-4 pb-8 min-h-0 overflow-y-auto">
           <AnimatePresence mode="wait">
             {/* Text Content */}
             <motion.div
@@ -564,7 +564,7 @@ export function HowItWorks() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -20 }}
                               transition={{ duration: 0.3 }}
-                              className="h-[480px] md:h-[520px] w-full overflow-hidden"
+                              className="h-[550px] md:h-[600px] w-full overflow-hidden"
                             >
                               {steps[activeStep].mobileScreens?.[subStep]}
                             </motion.div>
@@ -618,7 +618,7 @@ export function HowItWorks() {
                   <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
                     <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
                     <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-                      <div className="h-[480px] md:h-[520px] w-full p-4 flex items-center justify-center overflow-hidden">
+                      <div className="h-[550px] md:h-[600px] w-full p-4 flex items-center justify-center overflow-hidden">
                         <div className="w-full h-full">
                           <DigitalTwinVisualization
                             showLearning={steps[activeStep].showLearning}
