@@ -426,7 +426,7 @@ export function HowItWorks() {
         </div>
 
          {/* Active Step Content - Fits in remaining space */}
-         <div className="flex-1 grid gap-3 sm:gap-4 lg:grid-cols-2 items-center px-4 pb-2 min-h-0">
+         <div className="flex-1 grid gap-3 sm:gap-4 lg:grid-cols-2 items-start px-4 pb-4 min-h-0 overflow-y-auto">
           <AnimatePresence mode="wait">
             {/* Text Content */}
             <motion.div
@@ -548,10 +548,10 @@ export function HowItWorks() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="flex flex-col items-center justify-center w-full h-full min-h-0"
+              className="flex flex-col items-center justify-start w-full h-full min-h-0 pb-4"
             >
               {steps[activeStep].visual === 'mobile-dual' && steps[activeStep].mobileScreens ? (
-                <div className="w-full max-w-sm mx-auto">
+                <div className="w-full max-w-sm mx-auto mb-2">
                   <div className="relative">
                     <div className="relative mx-auto w-[300px] md:w-[340px]">
                       <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
@@ -564,7 +564,7 @@ export function HowItWorks() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -20 }}
                               transition={{ duration: 0.3 }}
-                              className="h-[550px] md:h-[600px] w-full overflow-hidden"
+                              className="h-[480px] md:h-[520px] w-full overflow-hidden"
                             >
                               {steps[activeStep].mobileScreens?.[subStep]}
                             </motion.div>
@@ -597,7 +597,7 @@ export function HowItWorks() {
                   </div>
                 </div>
               ) : steps[activeStep].visual === 'mobile' && steps[activeStep].mobileScreen ? (
-                <div className="w-full max-w-sm mx-auto">
+                <div className="w-full max-w-sm mx-auto mb-2">
                   <MobileAppPreview
                     screens={[
                       {
@@ -614,11 +614,11 @@ export function HowItWorks() {
                   <ControlledTwinDemo stage={subStep} />
                 </div>
               ) : (
-                <div className="relative mx-auto w-[300px] md:w-[340px]">
+                <div className="relative mx-auto w-[300px] md:w-[340px] mb-2">
                   <div className="relative rounded-[3rem] border-[8px] border-gray-900 bg-gray-900 p-2 shadow-2xl">
                     <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-gray-900" />
                     <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-                      <div className="h-[550px] md:h-[600px] w-full p-4 flex items-center justify-center overflow-hidden">
+                      <div className="h-[480px] md:h-[520px] w-full p-4 flex items-center justify-center overflow-hidden">
                         <div className="w-full h-full">
                           <DigitalTwinVisualization
                             showLearning={steps[activeStep].showLearning}

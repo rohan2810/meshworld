@@ -631,9 +631,9 @@ export function Demo() {
                           <div className="mb-1.5 flex items-center justify-between">
                             <div
                               className={cn(
-                                'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold text-bg shadow-sm bg-gradient-to-br',
+                                'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold shadow-sm bg-gradient-to-br',
                                 friend.color,
-                                isSelected ? "border-cy" : "border-bg"
+                                isSelected ? "border-cy text-white" : "border-bg text-white"
                               )}
                             >
                               {friend.avatar}

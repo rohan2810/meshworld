@@ -56,7 +56,7 @@ export function MobileAppPreview({ screens, className }: MobileAppPreviewProps) 
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="h-[550px] md:h-[600px] w-full overflow-hidden"
+                className="h-[480px] md:h-[520px] w-full overflow-hidden"
               >
                 {screens[activeScreen]?.mockup}
               </motion.div>

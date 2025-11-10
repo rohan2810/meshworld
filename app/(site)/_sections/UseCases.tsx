@@ -72,37 +72,6 @@ const tripExample = {
   ],
 }
 
-const personaUseCases = [
-  {
-    title: 'The Explorer',
-    description: 'Travels often or just moved cities. Never forgets favorite spots or context.',
-    sampleQuery: 'Show me all the spots where I felt most relaxed this month.',
-    emoji: '🗺️',
-    color: 'from-cy to-blue-500',
-  },
-  {
-    title: 'The Planner',
-    description: 'Hosts dinners, plans trips, and connects friends. Wants the right vibe for every group.',
-    sampleQuery: 'I am planning to get coffee with Sarah, suggest a place we both love.',
-    emoji: '🍷',
-    color: 'from-am to-orange-500',
-  },
-  {
-    title: 'The Archivist',
-    description: 'Keeps a living journal of feelings, meals, and breakthroughs. Solo reflection and journaling.',
-    sampleQuery: 'What patterns do you see in my weekend routines?',
-    emoji: '📔',
-    color: 'from-vi to-purple-500',
-  },
-  {
-    title: 'The Builder',
-    description: 'Partners and devs experimenting with experience graphs.',
-    sampleQuery: 'Building with friends, creatives, and planners who want real context.',
-    emoji: '🔧',
-    color: 'from-cy to-am',
-  },
-]
-
 export function UseCases() {
   const [activeExample, setActiveExample] = useState<'coffee' | 'trip'>('coffee')
 
@@ -451,55 +420,6 @@ export function UseCases() {
               </div>
             </div>
           </motion.div>
-        </div>
-
-        {/* Persona Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {personaUseCases.map((useCase, index) => (
-            <motion.div
-              key={useCase.title}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ y: -4, scale: 1.02 }}
-              className="group relative overflow-hidden rounded-2xl border border-fg/20 bg-gradient-to-br from-bg/70 via-bg/50 to-bg/70 p-6 backdrop-blur-sm transition-all duration-300 hover:border-cy/50 hover:shadow-2xl hover:shadow-cy/20"
-            >
-              {/* Animated gradient background */}
-              <div className={cn(
-                'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-20',
-                useCase.color
-              )} />
-              
-              {/* Glow effect */}
-              <div className={cn(
-                'absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br blur-3xl opacity-0 transition-all duration-500 group-hover:opacity-30 group-hover:scale-150',
-                useCase.color
-              )} />
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <motion.div
-                  className="mb-4 text-5xl"
-                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {useCase.emoji}
-                </motion.div>
-                <h3 className="mb-2 text-xl font-bold text-fg transition-colors group-hover:text-cy">
-                  {useCase.title}
-                </h3>
-                <p className="mb-4 text-sm leading-relaxed text-fg/70 group-hover:text-fg/80">
-                  {useCase.description}
-                </p>
-                <div className="rounded-lg bg-fg/5 p-3 border border-fg/10">
-                  <p className="text-xs text-fg/60 mb-1">Sample query:</p>
-                  <p className="text-xs text-fg/80 italic">&ldquo;{useCase.sampleQuery}&rdquo;</p>
-                </div>
-              </div>
-              
-            </motion.div>
-          ))}
         </div>
       </div>
     </Section>
