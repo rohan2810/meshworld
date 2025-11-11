@@ -110,6 +110,7 @@ export function CaptureMethodsDemo() {
               </div>
             </div>
 
+
             {/* Example Mockup */}
             <div className="mt-6 rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 p-4">
               <div className="mb-3 text-center text-xs text-fg/50">Example Check-in</div>
